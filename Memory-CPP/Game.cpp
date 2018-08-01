@@ -34,9 +34,15 @@ void Game::processInput()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed)
+		switch (event.type)
 		{
+		case sf::Event::MouseButtonPressed:
+			handlePlayerInput(event.key.code);
+		case sf::Event::Closed:
 			window.close();
+			break;
+		default:
+			break;
 		}
 	}
 }
@@ -68,5 +74,9 @@ void Game::renderScreen()
 	default:
 		break;
 	}
+}
+
+void Game::handlePlayerInput(sf::Keyboard::Key key)
+{
 }
 

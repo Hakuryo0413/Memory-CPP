@@ -24,6 +24,7 @@ private:
 	void render();
 
 	void renderScreen();
+	void handlePlayerInput(sf::Keyboard::Key key);
 
 	unsigned numberOfPlayers;
 	sf::Vector2u boardSize;
