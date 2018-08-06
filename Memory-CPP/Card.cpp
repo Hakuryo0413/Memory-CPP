@@ -26,3 +26,18 @@ void Card::setPosition(sf::Vector2u deckPosition)
 	position.y = float(deckPosition.y) * size.y + 10.0f * deckPosition.y;
 	cardShape.setPosition(position);
 }
+
+bool Card::isCardClicked(sf::Vector2f mousePosition)
+{
+	return cardShape.getGlobalBounds().contains(mousePosition);
+}
+
+void Card::revealCard()
+{
+	std::cout << id << std::endl;
+}
+
+Card::Suit Card::getSuit()
+{
+	return cardSuit;
+}

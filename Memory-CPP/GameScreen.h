@@ -7,5 +7,6 @@ public:
 	GameScreen();
 	~GameScreen();
 	virtual void renderScreen(sf::RenderWindow &window) = 0;
+	virtual void handleMouseClick(sf::Vector2f mousePosition);
 };
 

@@ -37,7 +37,16 @@ void Game::processInput()
 		switch (event.type)
 		{
 		case sf::Event::MouseButtonPressed:
-			handlePlayerInput(event.key.code);
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				// sf::Vector2f mousePosition(event.mouseButton.x, event.mouseButton.y);
+				sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+				handleMouseClick(mousePosition);
+			}
+			break;
+		case sf::Event::TextEntered:
+			handleTextEntry();
+			break;
 		case sf::Event::Closed:
 			window.close();
 			break;
@@ -76,7 +85,25 @@ void Game::renderScreen()
 	}
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key)
+void Game::handleMouseClick(sf::Vector2f mousePosition)
+{
+	switch (currentScreen)
+	{
+	case Screen::StartScreen:
+		startScreen->handleMouseClick(mousePosition);
+		break;
+	case Screen::GameBoard:
+		gameBoard->handleMouseClick(mousePosition);
+		break;
+	case Screen::EndScreen:
+		endScreen->handleMouseClick(mousePosition);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::handleTextEntry()
 {
 }
 
