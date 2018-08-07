@@ -1,18 +1,25 @@
 #include "stdafx.h"
 #include "Card.h"
 
-Card::Card(unsigned id) : id(id)
+Card::Card(unsigned id, Card::Suit suit) : id(id), cardSuit(suit)
 {
 	cardShape.setSize(size);
-	cardShape.setFillColor(sf::Color(28, 110, 140));
+	airCardTexture.loadFromFile(GRAPHICS_PATH "AirCard.png");
+	earthCardTexture.loadFromFile(GRAPHICS_PATH "EarthCard.png");
+	airCardTexture.loadFromFile(GRAPHICS_PATH "FireCard.png");
+	waterCardTexture.loadFromFile(GRAPHICS_PATH "WaterCard.png");
 }
-
 
 Card::~Card()
 {
 }
 
-sf::Vector2f Card::size = { 75.0f, 100.0f };
+sf::Vector2f Card::size = { 50.0f, 95.0f };
+sf::Texture Card::airCardTexture;
+sf::Texture Card::earthCardTexture;
+sf::Texture Card::fireCardTexture;
+sf::Texture Card::waterCardTexture;
+
 
 void Card::renderCard(sf::RenderWindow &window)
 {
@@ -34,7 +41,23 @@ bool Card::isCardClicked(sf::Vector2f mousePosition)
 
 void Card::revealCard()
 {
-	std::cout << id << std::endl;
+	switch (cardSuit)
+	{
+	case Card::Suit::Air:
+		cardShape.setTexture(&airCardTexture);
+		break;
+	case Card::Suit::Earth:
+		cardShape.setTexture(&earthCardTexture);
+		break;
+	case Card::Suit::Fire:
+		cardShape.setTexture(&fireCardTexture);
+		break;
+	case Card::Suit::Water:
+		cardShape.setTexture(&waterCardTexture);
+		break;
+	default:
+		break;
+	}
 }
 
 Card::Suit Card::getSuit()

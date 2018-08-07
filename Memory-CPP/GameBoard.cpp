@@ -44,11 +44,19 @@ void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 {
 	std::vector<Card*> deck;
-	for (unsigned i = 0; i < boardSize.x * boardSize.y; i++)
-	{
-		Card* card = new Card(i);
-		deck.push_back(card);
+	unsigned deckSize = boardSize.x * boardSize.y;
+	unsigned cardsPerSuit = deckSize / Card::Suit::COUNT;
+	unsigned cardIndex = 0;
+
+	for (unsigned i = 0; i < Card::Suit::COUNT; i++) {
+		for (unsigned j = 0; j < cardsPerSuit; j++)
+		{
+			Card* card = new Card(cardIndex, static_cast<Card::Suit>(i));
+			deck.push_back(card);
+			cardIndex++;
+		}
 	}
+
 	std::default_random_engine seed = std::default_random_engine{};
 	std::shuffle(std::begin(deck), std::end(deck), seed);
 	int index = 0;
