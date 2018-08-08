@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "TextureManager.h"
 #include "GameScreen.h"
 #include "StartScreen.h"
 #include "GameBoard.h"
@@ -8,6 +7,7 @@
 
 #define WIDTH 800
 #define HEIGHT 600
+#define FRAMERATE 60
 
 class Game
 {
@@ -19,10 +19,9 @@ public:
 
 private:
 	sf::RenderWindow window;
-	TextureManager textureManager;
 
 	void processInput();
-	void update();
+	void update(sf::Time deltaTime);
 	void render();
 
 	void renderScreen();
@@ -39,8 +38,8 @@ private:
 
 	Screen currentScreen;
 
-	GameScreen *startScreen;
-	GameScreen *gameBoard;
-	GameScreen *endScreen;
+	GameScreen * startScreen;
+	GameScreen * gameBoard;
+	GameScreen * endScreen;
 };
 

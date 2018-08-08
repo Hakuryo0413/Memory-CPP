@@ -3,12 +3,13 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
+#define GRAPHICS_PATH "data/graphics/"
 
 class TextureManager
 {
 public:
   static TextureManager * getTextureManager();
-  static sf::Texture & GetTexture(std::string const & filename);
+  static sf::Texture & getTexture(std::string const & filename);
 
 private:
   TextureManager();

@@ -39,6 +39,9 @@
     <ClInclude Include="Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -65,5 +68,22 @@
     <ClCompile Include="Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\graphics\AirCard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\graphics\EarthCard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\graphics\FireCard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\graphics\WaterCard.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

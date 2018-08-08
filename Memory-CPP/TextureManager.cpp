@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "TextureManager.h"
 
 TextureManager::TextureManager()
@@ -8,9 +9,9 @@ TextureManager::~TextureManager()
 {
 }
 
-TextureManager::TextureManager * TextureManager::singletonInstance;
+TextureManager * TextureManager::singletonInstance;
 
-TextureManager::TextureManager * getTextureManager()
+TextureManager * TextureManager::getTextureManager()
 {
   if (singletonInstance == NULL)
   {
@@ -19,7 +20,7 @@ TextureManager::TextureManager * getTextureManager()
   return singletonInstance;
 }
 
-sf::Texture & TextureManager::GetTexture(std::string const & filename)
+sf::Texture & TextureManager::getTexture(std::string const & filename)
 {
   std::map<std::string, sf::Texture> & textureMap = singletonInstance->managerTextures;
 
@@ -31,7 +32,7 @@ sf::Texture & TextureManager::GetTexture(std::string const & filename)
   else
   {
     sf::Texture & texture = textureMap[filename];
-    texture.loadFromFile(filename);
+	texture.loadFromFile(GRAPHICS_PATH + filename);
     return texture;
   }
 }

@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Game.h"
 
-
-Game::Game() : window(sf::VideoMode(WIDTH, HEIGHT), "Memory")
+Game::Game() : 
+	window(sf::VideoMode(WIDTH, HEIGHT), "Memory")
 {
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(FRAMERATE);
 	numberOfPlayers = 1;
 	boardSize = {4, 4};
 	currentScreen = Screen::GameBoard;
@@ -21,10 +21,12 @@ Game::~Game()
 
 void Game::run()
 {
+	sf::Clock clock;
 	while (window.isOpen())
 	{
+		sf::Time deltaTime = clock.restart();
 		processInput();
-		update();
+		update(deltaTime);
 		render();
 	}
 }
@@ -56,7 +58,7 @@ void Game::processInput()
 	}
 }
 
-void Game::update()
+void Game::update(sf::Time deltaTime)
 {
 }
 
