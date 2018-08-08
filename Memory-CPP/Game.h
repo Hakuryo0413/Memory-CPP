@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "TextureManager.h"
 #include "GameScreen.h"
 #include "StartScreen.h"
 #include "GameBoard.h"
@@ -15,9 +16,10 @@ public:
 	~Game();
 
 	void run();
-	
+
 private:
 	sf::RenderWindow window;
+	TextureManager textureManager;
 
 	void processInput();
 	void update();
