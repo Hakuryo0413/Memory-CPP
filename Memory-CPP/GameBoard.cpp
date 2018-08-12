@@ -6,6 +6,7 @@ GameBoard::GameBoard(StateManager * stateManager, sf::Vector2u boardSize, std::v
 	GameScreen(stateManager),
 	boardSize(boardSize),
 	players(players),
+	currentPlayer(players[0]),
 	resolving(false),
 	resolveDelayTime(sf::seconds(1)),
 	elapsedTime(sf::Time::Zero)
@@ -83,6 +84,19 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 	return deck;
 }
 
+void GameBoard::callNextPlayer()
+{
+	std::vector<Player*>::iterator currentPlayerIt = std::find(players.begin(), players.end(), currentPlayer);
+	if (currentPlayerIt != players.end())
+	{
+		currentPlayer = *currentPlayerIt++;
+	}
+	else
+	{
+		currentPlayer = players[0];
+	}
+}
+
 void GameBoard::renderDeck(sf::RenderWindow &window)
 {
 	for (size_t i = 0; i < deck.size(); i++)
@@ -152,10 +166,12 @@ void GameBoard::resolvePair()
 	{
 		solvedCards.insert(solvedCards.end(), revealedCards.begin(), revealedCards.end());
 		revealedCards.clear();
+		currentPlayer->increaseScore();
 
 		if (solvedCards.size() == deck.size())
 		{
 			finishGame();
+			return;
 		}
 	}
 	else
@@ -166,6 +182,7 @@ void GameBoard::resolvePair()
 		}
 		revealedCards.clear();
 	}
+	callNextPlayer();
 }
 
 void GameBoard::finishGame()

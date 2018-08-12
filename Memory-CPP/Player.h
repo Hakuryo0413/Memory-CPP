@@ -9,11 +9,12 @@ public:
 	~Player();
 
 	void renderPlayerTag(sf::RenderWindow &window);
-private:
+	void increaseScore();
 	std::string name;
+	unsigned score;
+private:
 	sf::Font playerFont;
 	sf::Text playerTag;
 
-	unsigned score;
 };
 

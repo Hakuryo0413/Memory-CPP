@@ -15,5 +15,7 @@ public:
 	void handleEnterPressed();
 private:
 	std::vector<Player*> players;
+	void sortPlayers();
+	bool comparePlayers(Player * firstPlayer, Player * secondPlayer);
 };
 
