@@ -6,7 +6,7 @@ Game::Game() :
 {
 	window.setFramerateLimit(FRAMERATE);
 	numberOfPlayers = 1;
-	boardSize = {4, 4};
+	boardSize = {6, 2};
 	currentScreen = Screen::GameBoard;
 	startScreen = new StartScreen();
 	gameBoard = new GameBoard(boardSize);
@@ -41,7 +41,6 @@ void Game::processInput()
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				// sf::Vector2f mousePosition(event.mouseButton.x, event.mouseButton.y);
 				sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 				handleMouseClick(mousePosition);
 			}
@@ -60,6 +59,20 @@ void Game::processInput()
 
 void Game::update(sf::Time deltaTime)
 {
+	switch (currentScreen)
+	{
+	case Game::Screen::StartScreen:
+		startScreen->updateScreen(deltaTime);
+		break;
+	case Game::Screen::GameBoard:
+		gameBoard->updateScreen(deltaTime);
+		break;
+	case Game::Screen::EndScreen:
+		endScreen->updateScreen(deltaTime);
+		break;
+	default:
+		break;
+	}
 }
 
 void Game::render()

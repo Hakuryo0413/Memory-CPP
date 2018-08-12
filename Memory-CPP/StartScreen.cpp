@@ -15,3 +15,7 @@ void StartScreen::renderScreen(sf::RenderWindow &window)
 {
 	std::cout << "rendering start screen" << std::endl;
 }
+
+void StartScreen::updateScreen(sf::Time deltaTime)
+{
+}

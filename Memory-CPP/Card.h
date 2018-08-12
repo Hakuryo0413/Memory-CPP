@@ -15,18 +15,28 @@ public:
 	~Card();
 
 	void renderCard(sf::RenderWindow &window);
+	void updateCard(sf::Time deltaTime);
 	void setPosition(sf::Vector2u deckPosition);
 	bool isCardClicked(sf::Vector2f mousePosition);
-	void revealCard();
+	void flipCard();
 	Suit getSuit();
 
 private:
 	unsigned id;
-	static sf::Vector2f size;
-	sf::RectangleShape cardShape;
-	Suit cardSuit;
-	// static sf::Texture cardBackTexture;
+	bool isFlipped;
+	bool spinning;
+
+	static sf::Vector2u size;
+	static sf::Time animationTime;
+	static sf::Texture & cardBackTexture;
+	static const double pi;
+
+	sf::Sprite cardSprite;
 	sf::Texture cardTexture;
+	sf::Time elapsedTime;
+
+	Suit cardSuit;
 	void setCardTexture(Suit suit);
+	void toggleTexture();
 };
 

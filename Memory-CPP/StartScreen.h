@@ -9,5 +9,6 @@ public:
 	StartScreen();
 	~StartScreen();
 	void renderScreen(sf::RenderWindow &window);
+	void updateScreen(sf::Time deltaTime);
 };
 

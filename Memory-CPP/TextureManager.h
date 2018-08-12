@@ -8,7 +8,7 @@
 class TextureManager
 {
 public:
-  static TextureManager * getTextureManager();
+  static TextureManager * getInstance();
   static sf::Texture & getTexture(std::string const & filename);
 
 private:

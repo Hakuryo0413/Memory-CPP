@@ -42,6 +42,9 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CardAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CardAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

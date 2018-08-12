@@ -2,7 +2,11 @@
 #include "GameBoard.h"
 
 
-GameBoard::GameBoard(sf::Vector2u boardSize) : boardSize(boardSize)
+GameBoard::GameBoard(sf::Vector2u boardSize) : 
+	boardSize(boardSize),
+	resolving(false),
+	resolveDelayTime(sf::seconds(1)),
+	elapsedTime(sf::Time::Zero)
 {
 	deck = createDeck(boardSize);
 }
@@ -17,27 +21,31 @@ void GameBoard::renderScreen(sf::RenderWindow &window)
 	renderDeck(window);
 }
 
+void GameBoard::updateScreen(sf::Time deltaTime)
+{
+	if (resolving)
+	{
+		elapsedTime += deltaTime;
+		if (elapsedTime >= resolveDelayTime)
+		{
+			elapsedTime = sf::Time::Zero;
+			resolving = false;
+			resolvePair();
+		}
+	}
+	updateDeck(deltaTime);
+}
+
 void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 {
+	if (resolving)		// disable click events while resolving
+	{
+		return;
+	}
 	Card * clickedCard = cardClicked(mousePosition);
 	if (clickedCard)
 	{
-		std::vector<Card*>::iterator it = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
-		if (it == revealedCards.end())
-		{
-			revealedCards.push_back(clickedCard);
-			clickedCard->revealCard();
-		}
-		if (revealedCards.size() == 2)
-		{
-			// setTimeout(() = > this.resolvePair(), 1000);
-		}
-		else if (revealedCards.size() > 2)
-		{
-			resolvePair();
-			revealedCards.push_back(clickedCard);
-			clickedCard->revealCard();
-		}
+		handleCardClick(clickedCard);
 	}
 }
 
@@ -80,6 +88,14 @@ void GameBoard::renderDeck(sf::RenderWindow &window)
 	}
 }
 
+void GameBoard::updateDeck(sf::Time deltaTime)
+{
+	for (size_t i = 0; i < deck.size(); i++)
+	{
+		deck[i]->updateCard(deltaTime);
+	}
+}
+
 Card * GameBoard::cardClicked(sf::Vector2f mousePosition)
 {
 	for (size_t i = 0; i < deck.size(); i++)
@@ -93,13 +109,57 @@ Card * GameBoard::cardClicked(sf::Vector2f mousePosition)
 	return nullptr;
 }
 
+void GameBoard::handleCardClick(Card * clickedCard)
+{
+	std::vector<Card*>::iterator itSolved = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
+	if (itSolved != revealedCards.end())		// ignore click on solved cards
+	{
+		return;
+	}
+
+	std::vector<Card*>::iterator itRevealed = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
+	if (itRevealed == revealedCards.end())		// if card not already revealed, reveal it
+	{
+		revealedCards.push_back(clickedCard);
+		clickedCard->flipCard();
+	}
+
+	if (revealedCards.size() == 2)
+	{
+		resolving = true;
+	}
+	//else if (revealedCards.size() > 2)
+	//{
+	//	resolving = true;
+	//	revealedCards.push_back(clickedCard);
+	//	clickedCard->flipCard();
+	//}
+}
+
 void GameBoard::resolvePair()
 {
 	if (revealedCards[0]->getSuit() == revealedCards[1]->getSuit())
 	{
-		solvedCards.push_back(revealedCards[0]);
-		solvedCards.push_back(revealedCards[1]);
+		solvedCards.insert(solvedCards.end(), revealedCards.begin(), revealedCards.end());
+		revealedCards.clear();
+
+		if (solvedCards.size() == deck.size())
+		{
+			finishGame();
+		}
 	}
+	else
+	{
+		for (size_t i = 0; i < revealedCards.size(); i++)
+		{
+			revealedCards[i]->flipCard();
+		}
+		revealedCards.clear();
+	}
+}
+
+void GameBoard::finishGame()
+{
 }
 
 

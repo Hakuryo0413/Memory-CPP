@@ -11,7 +11,7 @@ TextureManager::~TextureManager()
 
 TextureManager * TextureManager::singletonInstance;
 
-TextureManager * TextureManager::getTextureManager()
+TextureManager * TextureManager::getInstance()
 {
   if (singletonInstance == NULL)
   {
