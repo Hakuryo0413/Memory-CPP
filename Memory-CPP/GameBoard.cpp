@@ -2,8 +2,10 @@
 #include "GameBoard.h"
 
 
-GameBoard::GameBoard(sf::Vector2u boardSize) : 
+GameBoard::GameBoard(StateManager * stateManager, sf::Vector2u boardSize, std::vector<Player*> players) :
+	GameScreen(stateManager),
 	boardSize(boardSize),
+	players(players),
 	resolving(false),
 	resolveDelayTime(sf::seconds(1)),
 	elapsedTime(sf::Time::Zero)
@@ -19,6 +21,7 @@ GameBoard::~GameBoard()
 void GameBoard::renderScreen(sf::RenderWindow &window)
 {
 	renderDeck(window);
+	renderPlayers(window);
 }
 
 void GameBoard::updateScreen(sf::Time deltaTime)
@@ -96,6 +99,14 @@ void GameBoard::updateDeck(sf::Time deltaTime)
 	}
 }
 
+void GameBoard::renderPlayers(sf::RenderWindow & window)
+{
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		players[i]->renderPlayerTag(window);
+	}
+}
+
 Card * GameBoard::cardClicked(sf::Vector2f mousePosition)
 {
 	for (size_t i = 0; i < deck.size(); i++)
@@ -111,8 +122,8 @@ Card * GameBoard::cardClicked(sf::Vector2f mousePosition)
 
 void GameBoard::handleCardClick(Card * clickedCard)
 {
-	std::vector<Card*>::iterator itSolved = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
-	if (itSolved != revealedCards.end())		// ignore click on solved cards
+	std::vector<Card*>::iterator itSolved = std::find(solvedCards.begin(), solvedCards.end(), clickedCard);
+	if (itSolved != solvedCards.end())			// ignore click on solved cards
 	{
 		return;
 	}
@@ -124,15 +135,14 @@ void GameBoard::handleCardClick(Card * clickedCard)
 		clickedCard->flipCard();
 	}
 
-	if (revealedCards.size() == 2)
+	if (revealedCards.size() == 2)				// when two cards are revealed, start resolving with time delay
 	{
 		resolving = true;
 	}
 	//else if (revealedCards.size() > 2)
 	//{
+	//	revealedCards.erase(revealedCards.begin() + 1, revealedCards.end());
 	//	resolving = true;
-	//	revealedCards.push_back(clickedCard);
-	//	clickedCard->flipCard();
 	//}
 }
 
@@ -160,6 +170,7 @@ void GameBoard::resolvePair()
 
 void GameBoard::finishGame()
 {
+	stateManager->switchScreen(new EndScreen(stateManager, players));
 }
 
 

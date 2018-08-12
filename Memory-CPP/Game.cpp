@@ -2,26 +2,22 @@
 #include "Game.h"
 
 Game::Game() : 
-	window(sf::VideoMode(WIDTH, HEIGHT), "Memory")
+	window(sf::VideoMode(WIDTH, HEIGHT), "Memory"),
+	stateManager(new StateManager())
 {
 	window.setFramerateLimit(FRAMERATE);
-	numberOfPlayers = 1;
-	boardSize = {6, 2};
-	currentScreen = Screen::GameBoard;
-	startScreen = new StartScreen();
-	gameBoard = new GameBoard(boardSize);
 }
 
 
 Game::~Game()
 {
-	delete startScreen;
-	delete gameBoard;
+	delete stateManager;
 }
 
 void Game::run()
 {
 	sf::Clock clock;
+	stateManager->switchScreen(new StartScreen(stateManager));
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
@@ -45,6 +41,12 @@ void Game::processInput()
 				handleMouseClick(mousePosition);
 			}
 			break;
+		case sf::Event::KeyPressed:
+			if (event.key.code == sf::Keyboard::Enter)
+			{
+				handleEnterPressed();
+			}
+			break;
 		case sf::Event::TextEntered:
 			handleTextEntry();
 			break;
@@ -59,20 +61,7 @@ void Game::processInput()
 
 void Game::update(sf::Time deltaTime)
 {
-	switch (currentScreen)
-	{
-	case Game::Screen::StartScreen:
-		startScreen->updateScreen(deltaTime);
-		break;
-	case Game::Screen::GameBoard:
-		gameBoard->updateScreen(deltaTime);
-		break;
-	case Game::Screen::EndScreen:
-		endScreen->updateScreen(deltaTime);
-		break;
-	default:
-		break;
-	}
+	stateManager->currentScreen->updateScreen(deltaTime);
 }
 
 void Game::render()
@@ -84,41 +73,20 @@ void Game::render()
 
 void Game::renderScreen()
 {
-	switch (currentScreen)
-	{
-	case Screen::StartScreen:
-		startScreen->renderScreen(window);
-		break;
-	case Screen::GameBoard:
-		gameBoard->renderScreen(window);
-		break;
-	case Screen::EndScreen:
-		endScreen->renderScreen(window);
-		break;
-	default:
-		break;
-	}
+	stateManager->currentScreen->renderScreen(window);
 }
 
 void Game::handleMouseClick(sf::Vector2f mousePosition)
 {
-	switch (currentScreen)
-	{
-	case Screen::StartScreen:
-		startScreen->handleMouseClick(mousePosition);
-		break;
-	case Screen::GameBoard:
-		gameBoard->handleMouseClick(mousePosition);
-		break;
-	case Screen::EndScreen:
-		endScreen->handleMouseClick(mousePosition);
-		break;
-	default:
-		break;
-	}
+	stateManager->currentScreen->handleMouseClick(mousePosition);
 }
 
 void Game::handleTextEntry()
 {
+}
+
+void Game::handleEnterPressed()
+{
+	stateManager->currentScreen->handleEnterPressed();
 }
 

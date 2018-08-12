@@ -3,12 +3,15 @@
 #include <algorithm>
 #include <random>
 #include "GameScreen.h"
+#include "EndScreen.h"
 #include "Card.h"
+#include "Player.h"
+
 class GameBoard :
 	public GameScreen
 {
 public:
-	GameBoard(sf::Vector2u boardSize);
+	GameBoard(StateManager * stateManager, sf::Vector2u boardSize, std::vector<Player*> players);
 	~GameBoard();
 
 	sf::Vector2u boardSize;
@@ -21,8 +24,11 @@ private:
 	std::vector<Card*> solvedCards;
 	std::vector<Card*> createDeck(sf::Vector2u boardSize);
 
+	std::vector<Player*> players;
+
 	void renderDeck(sf::RenderWindow &window);
 	void updateDeck(sf::Time deltaTime);
+	void renderPlayers(sf::RenderWindow &window);
 
 	Card* cardClicked(sf::Vector2f mousePosition);
 	void handleCardClick(Card * clickedCard);

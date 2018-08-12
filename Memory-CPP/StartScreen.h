@@ -1,14 +1,19 @@
 #pragma once
 #include "GameScreen.h"
-#include <iostream>
+#include "GameBoard.h"
+#include "Player.h"
 
 class StartScreen :
 	public GameScreen
 {
 public:
-	StartScreen();
+	StartScreen(StateManager * stateManager);
 	~StartScreen();
 	void renderScreen(sf::RenderWindow &window);
 	void updateScreen(sf::Time deltaTime);
+	void handleEnterPressed();
+private:
+	sf::Vector2u boardSize;
+	std::vector<Player*> players;
 };
 
