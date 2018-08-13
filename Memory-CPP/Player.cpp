@@ -13,14 +13,14 @@ Player::~Player()
 {
 }
 
-sf::Font & Player::playerFont = TextureManager::getInstance()->getFont("Beleren-Bold.ttf");
+sf::Font & Player::playerFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
 
 void Player::renderPlayerTag(sf::RenderWindow & window)
 {
 	window.draw(playerTag);
 }
 
-void Player::renderPlayerTag(sf::RenderWindow & window)
+void Player::renderPlayerScore(sf::RenderWindow & window)
 {
 	window.draw(playerScore);
 }

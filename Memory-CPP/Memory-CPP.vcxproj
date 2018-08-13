@@ -153,9 +153,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardAnimation.h" />
     <ClInclude Include="EndScreen.h" />
+    <ClInclude Include="FadeInAnimation.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameScreen.h" />
@@ -167,9 +169,11 @@
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardAnimation.cpp" />
     <ClCompile Include="EndScreen.cpp" />
+    <ClCompile Include="FadeInAnimation.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameScreen.cpp" />
@@ -186,10 +190,14 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\graphics\AirCard.png" />
-    <Image Include="data\graphics\EarthCard.png" />
-    <Image Include="data\graphics\FireCard.png" />
-    <Image Include="data\graphics\WaterCard.png" />
+    <Image Include="data\graphics\AirCard(90x160).png" />
+    <Image Include="data\graphics\CardBack(90x160).png" />
+    <Image Include="data\graphics\EarthCard(90x160).png" />
+    <Image Include="data\graphics\FireCard(90x160).png" />
+    <Image Include="data\graphics\WaterCard(90x160).png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="data\fonts\Beleren-Bold.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

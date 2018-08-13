@@ -21,6 +21,6 @@ private:
 	void sortPlayers();
 	void setWinner();
 	void positionTags();
-	bool comparePlayers(Player * firstPlayer, Player * secondPlayer);
+	static bool sortByScore(const Player * firstPlayer, const Player * const secondPlayer);
 };
 

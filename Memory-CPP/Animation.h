@@ -8,13 +8,13 @@ public:
 	Animation(sf::Sprite sprite, sf::Time animationDuration);
 	~Animation();
 
-  void startAnimation();
-  void updateSprite(sf::Time deltaTime);
+	void startAnimation();
+	void updateSprite(sf::Time deltaTime);
 protected:
-  bool playing,
+	bool playing;
 	static const double pi;
-  sf::Time elapsedTime;
-  sf::Sprite sprite;
-  sf::Time animationDuration;
-  virtual void applyTransformation() = 0;
+	sf::Time elapsedTime;
+	sf::Sprite sprite;
+	sf::Time animationDuration;
+	virtual void applyTransformation() = 0;
 };

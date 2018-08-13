@@ -1,26 +1,26 @@
 #include "stdafx.h"
 #include "TextureManager.h"
 
-TextureManager::TextureManager()
+AssetManager::AssetManager()
 {
 }
 
-TextureManager::~TextureManager()
+AssetManager::~AssetManager()
 {
 }
 
-TextureManager * TextureManager::singletonInstance;
+AssetManager * AssetManager::singletonInstance;
 
-TextureManager * TextureManager::getInstance()
+AssetManager * AssetManager::getInstance()
 {
   if (singletonInstance == NULL)
   {
-    singletonInstance = new TextureManager();
+    singletonInstance = new AssetManager();
   }
   return singletonInstance;
 }
 
-sf::Texture & TextureManager::getTexture(std::string const & filename)
+sf::Texture & AssetManager::getTexture(std::string const & filename)
 {
   std::map<std::string, sf::Texture> & textureMap = singletonInstance->managerTextures;
 
@@ -37,7 +37,7 @@ sf::Texture & TextureManager::getTexture(std::string const & filename)
   }
 }
 
-sf::Font & TextureManager::getTexture(std::string const & filename)
+sf::Font & AssetManager::getFont(std::string const & filename)
 {
   std::map<std::string, sf::Font> & fontMap = singletonInstance->managerFonts;
 
@@ -54,7 +54,7 @@ sf::Font & TextureManager::getTexture(std::string const & filename)
   }
 }
 
-sf::SoundBuffer & TextureManager::getSoundBuffer(std::string const & filename)
+sf::SoundBuffer & AssetManager::getSoundBuffer(std::string const & filename)
 {
   std::map<std::string, sf::SoundBuffer> & soundBufferMap = singletonInstance->managerSoundBuffers;
 

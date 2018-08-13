@@ -51,6 +51,12 @@
     <ClInclude Include="StateManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeInAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -89,19 +95,33 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeInAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\graphics\AirCard.png">
+    <Image Include="data\graphics\AirCard(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="data\graphics\EarthCard.png">
+    <Image Include="data\graphics\CardBack(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="data\graphics\FireCard.png">
+    <Image Include="data\graphics\EarthCard(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="data\graphics\WaterCard.png">
+    <Image Include="data\graphics\FireCard(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\graphics\WaterCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="data\fonts\Beleren-Bold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

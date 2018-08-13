@@ -17,7 +17,7 @@ Card::~Card()
 {
 }
 
-sf::Texture & Card::cardBackTexture = TextureManager::getInstance()->getTexture("CardBack(90x160).png");
+sf::Texture & Card::cardBackTexture = AssetManager::getInstance()->getTexture("CardBack(90x160).png");
 sf::Vector2u Card::size = cardBackTexture.getSize();
 
 sf::Time Card::animationTime = sf::seconds(0.5);
@@ -52,11 +52,11 @@ void Card::updateCard(sf::Time deltaTime)
 
 	if (elapsedTime < animationTime / 2.f) {
 		float scale = 1.f - elapsedTime / (animationTime / 2.f);
-		cardSprite.setScale(std::sin(scale * pi / 2), 1);
+		cardSprite.setScale(float(std::sin(scale * pi / 2)), 1.f);
 	}
 	else {
 		float scale = (elapsedTime - (animationTime / 2.f)) / (animationTime / 2.f);
-		cardSprite.setScale(std::sin(scale * pi / 2), 1);
+		cardSprite.setScale(float(std::sin(scale * pi / 2)), 1.f);
 	}
 }
 
@@ -108,7 +108,7 @@ void Card::setCardTexture(Suit suit)
 		break;
 	}
 
-	cardTexture = TextureManager::getInstance()->getTexture(filename);
+	cardTexture = AssetManager::getInstance()->getTexture(filename);
 }
 
 void Card::toggleTexture()

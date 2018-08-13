@@ -5,7 +5,7 @@ EndScreen::EndScreen(StateManager * stateManager, std::vector<Player*> players) 
 	GameScreen(stateManager),
 	players(players)
 {
-	displayPlayerScore();
+	displayPlayerScores();
 }
 
 EndScreen::~EndScreen()
@@ -27,7 +27,7 @@ void EndScreen::handleEnterPressed()
 	stateManager->switchScreen(new StartScreen(stateManager));
 }
 
-void EndScreen::displayPlayerScore()
+void EndScreen::displayPlayerScores()
 {
 	sortPlayers();
 	setWinner();
@@ -36,10 +36,10 @@ void EndScreen::displayPlayerScore()
 
 void EndScreen::sortPlayers()
 {
-	std::sort(players.begin(), players.end(), comparePlayers);
+	std::sort(players.begin(), players.end(), sortByScore);
 }
 
-bool EndScreen::comparePlayers(Player * firstPlayer, Player * secondPlayer)
+bool EndScreen::sortByScore(const Player * firstPlayer, const Player * secondPlayer)
 {
 	return (firstPlayer->score < secondPlayer->score);
 }
@@ -62,17 +62,21 @@ void EndScreen::positionTags()
 	float playerListHeight = 100.f;
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		player[i]->playerTag.setPosition(playerListHeight, 100.f);
-		player[i]->playerScore.setPosition(playerListHeight, 300.f);
-		playerListHeight += player[i]->playerTag.getCharacterSize() + 16.f;
+		players[i]->playerTag.setPosition(playerListHeight, 100.f);
+		players[i]->playerScore.setPosition(playerListHeight, 300.f);
+		playerListHeight += players[i]->playerTag.getCharacterSize() + 16.f;
 	}
 }
 
-void renderPlayerList(sf::RenderWindow & window)
+void EndScreen::renderPlayerList(sf::RenderWindow & window)
 {
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		player[i]->renderPlayerTag(window);
-		player[i]->renderPlayerScore(window);
+		players[i]->renderPlayerTag(window);
+		players[i]->renderPlayerScore(window);
 	}
+}
+
+void EndScreen::renderPlayAgainButton(sf::RenderWindow & window)
+{
 }
