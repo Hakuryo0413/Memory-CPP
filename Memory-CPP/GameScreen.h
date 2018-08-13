@@ -2,13 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include "StateManager.h"
 
-class StateManager;
-
 class GameScreen
 {
 public:
 	GameScreen();
-	GameScreen(StateManager * stateManager);
+	GameScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings);
 	~GameScreen();
 
 	virtual void renderScreen(sf::RenderWindow &window) = 0;
@@ -18,5 +16,6 @@ public:
 
 protected:
 	StateManager * stateManager;
+	StateManager::GameSettings * gameSettings;
 };
 

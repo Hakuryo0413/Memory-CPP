@@ -7,14 +7,14 @@ class EndScreen :
 	public GameScreen
 {
 public:
-	EndScreen(StateManager * stateManager, std::vector<Player*> players);
+	EndScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings);
 	~EndScreen();
 
-	void renderScreen(sf::RenderWindow &window);
+	void renderScreen(sf::RenderWindow & window);
 	void updateScreen(sf::Time deltaTime);
 	void handleEnterPressed();
+	void setPlayers(std::vector<Player *> players);
 private:
-	std::vector<Player*> players;
 	void renderPlayerList(sf::RenderWindow & window);
 	void renderPlayAgainButton(sf::RenderWindow & window);
 	void displayPlayerScores();

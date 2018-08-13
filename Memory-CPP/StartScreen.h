@@ -7,13 +7,10 @@ class StartScreen :
 	public GameScreen
 {
 public:
-	StartScreen(StateManager * stateManager);
+	StartScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings);
 	~StartScreen();
 	void renderScreen(sf::RenderWindow &window);
 	void updateScreen(sf::Time deltaTime);
 	void handleEnterPressed();
-private:
-	sf::Vector2u boardSize;
-	std::vector<Player*> players;
 };
 

@@ -1,19 +1,16 @@
 #include "stdafx.h"
 #include "StartScreen.h"
 
-StartScreen::StartScreen(StateManager * stateManager) :
-	GameScreen(stateManager),
-	boardSize(4, 4)
+StartScreen::StartScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings) :
+	GameScreen(stateManager, gameSettings)
 {
-	players.push_back(new Player("Tihana"));
+	gameSettings->players.push_back(new Player("Tihana"));
+	gameSettings->boardSize = { 4, 4 };
 }
 
 StartScreen::~StartScreen()
 {
-	for (size_t i = 0; i < players.size(); i++)
-	{
-		delete players[i];
-	}
+	delete gameSettings;
 }
 
 void StartScreen::renderScreen(sf::RenderWindow &window)
@@ -26,5 +23,6 @@ void StartScreen::updateScreen(sf::Time deltaTime)
 
 void StartScreen::handleEnterPressed()
 {
-	stateManager->switchScreen(new GameBoard(stateManager, boardSize, players));
+	stateManager->setGameSettings(gameSettings);
+	stateManager->switchScreen(StateManager::Screen::Gameboard);
 }

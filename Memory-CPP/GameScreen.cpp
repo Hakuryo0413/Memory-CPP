@@ -5,8 +5,9 @@ GameScreen::GameScreen()
 {
 }
 
-GameScreen::GameScreen(StateManager * stateManager) :
-	stateManager(stateManager)
+GameScreen::GameScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings) :
+	stateManager(stateManager),
+	gameSettings(gameSettings)
 {
 }
 

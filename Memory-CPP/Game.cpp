@@ -17,7 +17,7 @@ Game::~Game()
 void Game::run()
 {
 	sf::Clock clock;
-	stateManager->switchScreen(new StartScreen(stateManager));
+	stateManager->switchScreen(StateManager::Screen::StartScreen);
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
