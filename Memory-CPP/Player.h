@@ -1,7 +1,7 @@
 #pragma once
 #include "string"
 #include <SFML/Graphics.hpp>
-#include "TextureManager.h"
+#include "AssetManager.h"
 
 class Player
 {

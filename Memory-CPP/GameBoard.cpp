@@ -2,14 +2,15 @@
 #include "GameBoard.h"
 
 
-GameBoard::GameBoard(StateManager * stateManager, StateManager::GameSettings * gameSettings) :
-	GameScreen(stateManager, gameSettings),
-	currentPlayer(gameSettings->players[0]),
+GameBoard::GameBoard(StateManager * stateManager) :
+	GameScreen(stateManager),
+	currentPlayer(stateManager->gameSettings->players[0]),
 	resolving(false),
 	resolveDelayTime(sf::seconds(1)),
 	elapsedTime(sf::Time::Zero)
 {
-	deck = createDeck(gameSettings->boardSize);
+	deck = createDeck(stateManager->gameSettings->boardSize);
+	players = stateManager->getPlayers();
 }
 
 
@@ -84,14 +85,14 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 
 void GameBoard::callNextPlayer()
 {
-	std::vector<Player*>::iterator currentPlayerIt = std::find(gameSettings->players.begin(), gameSettings->players.end(), currentPlayer);
-	if (currentPlayerIt != gameSettings->players.end())
+	std::vector<Player*>::iterator currentPlayerIt = std::find(players.begin(), players.end(), currentPlayer);
+	if (currentPlayerIt != players.end())
 	{
 		currentPlayer = *currentPlayerIt++;
 	}
 	else
 	{
-		currentPlayer = gameSettings->players[0];
+		currentPlayer = players[0];
 	}
 }
 
@@ -113,9 +114,9 @@ void GameBoard::updateDeck(sf::Time deltaTime)
 
 void GameBoard::renderPlayers(sf::RenderWindow & window)
 {
-	for (size_t i = 0; i < gameSettings->players.size(); i++)
+	for (size_t i = 0; i < players.size(); i++)
 	{
-		gameSettings->players[i]->renderPlayerTag(window);
+		players[i]->renderPlayerTag(window);
 	}
 }
 

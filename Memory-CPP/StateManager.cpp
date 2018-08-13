@@ -6,7 +6,7 @@
 #include "EndScreen.h"
 
 StateManager::StateManager() :
-	gameSettings(new GameSettings)
+	gameSettings(new GameSettings())
 {
 }
 
@@ -26,26 +26,37 @@ void StateManager::switchScreen(Screen nextScreen)
 	switch (nextScreen)
 	{
 	case Screen::StartScreen:
-		currentScreen = new StartScreen(this, gameSettings);
+		currentScreen = new StartScreen(this);
 		break;
 	case Screen::Gameboard:
-		currentScreen = new GameBoard(this, gameSettings);
+		currentScreen = new GameBoard(this);
 		break;
 	case Screen::EndScreen:
-		currentScreen = new EndScreen(this, gameSettings);
+		currentScreen = new EndScreen(this);
 		break;
 	default:
 		break;
 	}
 }
 
-void StateManager::setGameSettings(GameSettings * gameSettings)
+std::vector<Player*> StateManager::getPlayers()
 {
-	gameSettings = gameSettings;
+	return gameSettings->players;
 }
 
-StateManager::GameSettings * StateManager::getGameSettings()
+void StateManager::setPlayers(std::vector<Player*> players)
 {
-	return gameSettings;
+	gameSettings->players = players;
+}
+
+void StateManager::setBoardSize(sf::Vector2u boardSize)
+{
+	gameSettings->boardSize = boardSize;
+}
+
+void StateManager::clearSettings()
+{
+	gameSettings->players.clear();
+	gameSettings->boardSize = { 4, 4 };
 }
 

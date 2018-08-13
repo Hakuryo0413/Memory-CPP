@@ -11,7 +11,7 @@ class GameBoard :
 	public GameScreen
 {
 public:
-	GameBoard(StateManager * stateManager, StateManager::GameSettings * gameSettings);
+	GameBoard(StateManager * stateManager);
 	~GameBoard();
 
 	void renderScreen(sf::RenderWindow &window);
@@ -23,6 +23,7 @@ private:
 	std::vector<Card*> solvedCards;
 	std::vector<Card*> createDeck(sf::Vector2u boardSize);
 
+	std::vector<Player *> players;
 	Player * currentPlayer;
 	void callNextPlayer();
 

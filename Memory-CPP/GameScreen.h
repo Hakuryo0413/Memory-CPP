@@ -6,7 +6,7 @@ class GameScreen
 {
 public:
 	GameScreen();
-	GameScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings);
+	GameScreen(StateManager * stateManager);
 	~GameScreen();
 
 	virtual void renderScreen(sf::RenderWindow &window) = 0;
@@ -16,6 +16,5 @@ public:
 
 protected:
 	StateManager * stateManager;
-	StateManager::GameSettings * gameSettings;
 };
 

@@ -17,6 +17,11 @@ public:
 	};
 
 	void switchScreen(Screen nextScreen);
+	std::vector<Player *> getPlayers();
+	void setPlayers(std::vector<Player *> players);
+	void setBoardSize(sf::Vector2u boardSize);
+	void clearSettings();
+
 	GameScreen* currentScreen;
 
 	struct GameSettings
@@ -26,17 +31,8 @@ public:
 		GameSettings(std::vector<Player *> players, sf::Vector2u boardSize) : players(players), boardSize(boardSize) {};
 		std::vector<Player *> players;
 		sf::Vector2u boardSize;
-		void clearSettings()
-		{
-			players.clear();
-			boardSize = { 0, 0 };
-		}
 	};
 
-	void setGameSettings(GameSettings * gameSettings);
-	GameSettings * getGameSettings();
-
-private:
 	GameSettings * gameSettings;
 };
 

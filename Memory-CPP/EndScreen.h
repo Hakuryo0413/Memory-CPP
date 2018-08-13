@@ -7,13 +7,12 @@ class EndScreen :
 	public GameScreen
 {
 public:
-	EndScreen(StateManager * stateManager, StateManager::GameSettings * gameSettings);
+	EndScreen(StateManager * stateManager);
 	~EndScreen();
 
 	void renderScreen(sf::RenderWindow & window);
 	void updateScreen(sf::Time deltaTime);
 	void handleEnterPressed();
-	void setPlayers(std::vector<Player *> players);
 private:
 	void renderPlayerList(sf::RenderWindow & window);
 	void renderPlayAgainButton(sf::RenderWindow & window);
@@ -22,5 +21,6 @@ private:
 	void setWinner();
 	void positionTags();
 	static bool sortByScore(const Player * firstPlayer, const Player * const secondPlayer);
+	std::vector<Player *> players;
 };
 

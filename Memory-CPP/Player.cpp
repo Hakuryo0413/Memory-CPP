@@ -3,10 +3,10 @@
 
 Player::Player(std::string name) :
 	name(name),
-	score(0)
+	score(0),
+	playerTag(name, playerFont),
+	playerScore(score, playerFont)
 {
-	playerTag.setString(name);
-	playerScore.setString(score);
 }
 
 Player::~Player()

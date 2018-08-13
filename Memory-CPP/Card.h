@@ -1,5 +1,5 @@
 #pragma once
-#include "TextureManager.h"
+#include "AssetManager.h"
 #include <SFML/Graphics.hpp>
 
 class Card
