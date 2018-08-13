@@ -15,7 +15,12 @@ public:
 	void handleEnterPressed();
 private:
 	std::vector<Player*> players;
+	void renderPlayerList(sf::RenderWindow & window);
+	void renderPlayAgainButton(sf::RenderWindow & window);
+	void displayPlayerScores();
 	void sortPlayers();
+	void setWinner();
+	void positionTags();
 	bool comparePlayers(Player * firstPlayer, Player * secondPlayer);
 };
 

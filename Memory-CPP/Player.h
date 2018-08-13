@@ -1,6 +1,7 @@
 #pragma once
 #include "string"
 #include <SFML/Graphics.hpp>
+#include "TextureManager.h"
 
 class Player
 {
@@ -9,12 +10,13 @@ public:
 	~Player();
 
 	void renderPlayerTag(sf::RenderWindow &window);
+	void renderPlayerScore(sf::RenderWindow &window);
 	void increaseScore();
-	std::string name;
+	sf::Text playerTag;
+	sf::Text playerScore;
 	unsigned score;
 private:
-	sf::Font playerFont;
-	sf::Text playerTag;
-
+	std::string name;
+	static sf::Font & playerFont;
 };
 

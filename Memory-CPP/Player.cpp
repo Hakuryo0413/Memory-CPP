@@ -6,18 +6,27 @@ Player::Player(std::string name) :
 	score(0)
 {
 	playerTag.setString(name);
+	playerScore.setString(score);
 }
 
 Player::~Player()
 {
 }
 
+sf::Font & Player::playerFont = TextureManager::getInstance()->getFont("Beleren-Bold.ttf");
+
 void Player::renderPlayerTag(sf::RenderWindow & window)
 {
 	window.draw(playerTag);
 }
 
+void Player::renderPlayerTag(sf::RenderWindow & window)
+{
+	window.draw(playerScore);
+}
+
 void Player::increaseScore()
 {
 	score++;
+	playerScore.setString(score);
 }
