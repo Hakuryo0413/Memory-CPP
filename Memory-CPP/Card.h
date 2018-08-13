@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 
