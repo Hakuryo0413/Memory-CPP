@@ -1,6 +1,7 @@
 #pragma once
-#include "AssetManager.h"
 #include <SFML/Graphics.hpp>
+#include "AssetManager.h"
+#include "CardAnimation.h"
 
 class Card
 {
@@ -22,20 +23,17 @@ public:
 
 private:
 	unsigned id;
-	bool isFlipped;
-	bool spinning;
 
 	static sf::Vector2u size;
 	static sf::Time animationTime;
 	static sf::Texture & cardBackTexture;
-	static const double pi;
 
 	sf::Sprite cardSprite;
 	sf::Texture cardTexture;
-	sf::Time elapsedTime;
 
 	Suit cardSuit;
 	void setCardTexture(Suit suit);
-	void toggleTexture();
+
+	CardAnimation * cardAnimation;
 };
 

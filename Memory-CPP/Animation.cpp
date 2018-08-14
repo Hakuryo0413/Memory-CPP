@@ -7,7 +7,7 @@ Animation::Animation() :
 {
 }
 
-Animation::Animation(sf::Sprite sprite, sf::Time animationDuration) :
+Animation::Animation(sf::Sprite * sprite, sf::Time animationDuration) :
 	sprite(sprite),
 	animationDuration(animationDuration),
 	elapsedTime(sf::Time::Zero),
@@ -23,7 +23,16 @@ const double Animation::pi = std::acos(-1);
 
 void Animation::startAnimation()
 {
-	playing = true;
+	if (!playing)
+	{
+		playing = true;
+	}
+}
+
+void Animation::stopAnimation()
+{
+	playing = false;
+	elapsedTime = sf::Time::Zero;
 }
 
 void Animation::updateSprite(sf::Time deltaTime)
@@ -35,8 +44,7 @@ void Animation::updateSprite(sf::Time deltaTime)
 	elapsedTime += deltaTime;
 	if (elapsedTime >= animationDuration)
 	{
-		playing = false;
-		elapsedTime = sf::Time::Zero;
+		stopAnimation();
 		return;
 	}
 

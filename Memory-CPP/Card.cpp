@@ -4,24 +4,21 @@
 Card::Card(unsigned id, Card::Suit suit) :
 	id(id),
 	cardSuit(suit),
-	cardSprite(cardBackTexture),
-	cardTexture(),
-	isFlipped(false),
-	spinning(false),
-	elapsedTime(sf::Time::Zero)
+	cardSprite(cardBackTexture)
 {
 	setCardTexture(suit);
+	cardAnimation = new CardAnimation(&cardSprite, animationTime, &cardTexture);
 }
 
 Card::~Card()
 {
+	delete cardAnimation;
 }
 
 sf::Texture & Card::cardBackTexture = AssetManager::getInstance()->getTexture("CardBack(90x160).png");
 sf::Vector2u Card::size = cardBackTexture.getSize();
 
 sf::Time Card::animationTime = sf::seconds(0.5);
-const double Card::pi = std::acos(-1);
 
 void Card::renderCard(sf::RenderWindow &window)
 {
@@ -30,34 +27,7 @@ void Card::renderCard(sf::RenderWindow &window)
 
 void Card::updateCard(sf::Time deltaTime)
 {
-	if (!spinning)
-	{
-		return;
-	}
-
-	elapsedTime += deltaTime;
-	if (elapsedTime >= animationTime)
-	{
-		spinning = false;
-		isFlipped = false;
-		elapsedTime = sf::Time::Zero;
-		return;
-	}
-
-	if (elapsedTime >= animationTime / 2.f && !isFlipped)
-	{
-		toggleTexture();
-		isFlipped = true;
-	}
-
-	if (elapsedTime < animationTime / 2.f) {
-		float scale = 1.f - elapsedTime / (animationTime / 2.f);
-		cardSprite.setScale(float(std::sin(scale * pi / 2)), 1.f);
-	}
-	else {
-		float scale = (elapsedTime - (animationTime / 2.f)) / (animationTime / 2.f);
-		cardSprite.setScale(float(std::sin(scale * pi / 2)), 1.f);
-	}
+	cardAnimation->updateSprite(deltaTime);
 }
 
 void Card::setPosition(sf::Vector2u deckPosition)
@@ -76,10 +46,7 @@ bool Card::isCardClicked(sf::Vector2f mousePosition)
 
 void Card::flipCard()
 {
-	if (!spinning)
-	{
-		spinning = true;
-	}
+	cardAnimation->startAnimation();
 }
 
 Card::Suit Card::getSuit()
@@ -111,14 +78,3 @@ void Card::setCardTexture(Suit suit)
 	cardTexture = AssetManager::getInstance()->getTexture(filename);
 }
 
-void Card::toggleTexture()
-{
-	if (cardSprite.getTexture() == & cardBackTexture)
-	{
-		cardSprite.setTexture(cardTexture);
-	}
-	else
-	{
-		cardSprite.setTexture(cardBackTexture);
-	}
-}

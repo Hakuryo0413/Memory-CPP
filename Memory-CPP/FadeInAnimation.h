@@ -6,9 +6,9 @@ class FadeInAnimation :
 {
 public:
 	FadeInAnimation();
-	FadeInAnimation(sf::Sprite sprite, sf::Time animationDuration);
+	FadeInAnimation(sf::Sprite * sprite, sf::Time animationDuration);
 	~FadeInAnimation();
 
-protected:
-  void applyTransformation() = 0;
+private:
+  void applyTransformation();
 };
