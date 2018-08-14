@@ -52,6 +52,12 @@ void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 	}
 }
 
+// TODO remove for release
+void GameBoard::handleEnterPressed()
+{
+	finishGame();
+}
+
 std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 {
 	std::vector<Card*> deck;

@@ -5,7 +5,7 @@ Player::Player(std::string name) :
 	name(name),
 	score(0),
 	playerTag(name, playerFont),
-	playerScore(score, playerFont)
+	playerScore("0", playerFont)
 {
 }
 
@@ -28,5 +28,5 @@ void Player::renderPlayerScore(sf::RenderWindow & window)
 void Player::increaseScore()
 {
 	score++;
-	playerScore.setString(score);
+	playerScore.setString(std::to_string(score));
 }
