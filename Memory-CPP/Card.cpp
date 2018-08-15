@@ -18,7 +18,7 @@ Card::~Card()
 sf::Texture & Card::cardBackTexture = AssetManager::getInstance()->getTexture("CardBack(90x160).png");
 sf::Vector2u Card::size = cardBackTexture.getSize();
 
-sf::Time Card::animationTime = sf::seconds(0.5);
+sf::Time Card::animationTime = sf::seconds(0.5f);
 
 void Card::renderCard(sf::RenderWindow &window)
 {

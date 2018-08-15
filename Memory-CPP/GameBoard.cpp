@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "GameBoard.h"
-
+#include <iostream>
 
 GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
-	currentPlayer(stateManager->gameSettings->players[0]),
-	resolveDelayTime(sf::seconds(0.7)),
+	resolveDelayTime(sf::seconds(0.7f)),
 	resolveTimeout(new SetTimeout())
 {
 	deck = createDeck(stateManager->gameSettings->boardSize);
 	players = stateManager->getPlayers();
+	currentPlayer = players[0];
 }
 
 
@@ -82,10 +82,11 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 
 void GameBoard::callNextPlayer()
 {
-	std::vector<Player*>::iterator currentPlayerIt = std::find(players.begin(), players.end(), currentPlayer);
-	if (currentPlayerIt != players.end())
+	auto currentPlayerIt = std::find(players.begin(), players.end(), currentPlayer);
+	auto nextPlayarIt = ++currentPlayerIt;
+	if (nextPlayarIt != players.end())
 	{
-		currentPlayer = *currentPlayerIt++;
+		currentPlayer = *nextPlayarIt;
 	}
 	else
 	{
@@ -113,7 +114,7 @@ void GameBoard::renderPlayers(sf::RenderWindow & window)
 {
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		players[i]->renderPlayerTag(window);
+		players[i]->renderPlayer(window, Player::PlayerComponents::Name);
 	}
 }
 

@@ -1,4 +1,5 @@
 
+
 template <typename Animated>
 Animation<Animated>::Animation() :
 	elapsedTime(sf::Time::Zero),

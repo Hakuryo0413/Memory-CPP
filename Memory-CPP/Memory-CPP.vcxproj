@@ -157,7 +157,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardAnimation.h" />
     <ClInclude Include="EndScreen.h" />
-    <ClInclude Include="FadeInAnimation.h" />
+    <ClInclude Include="FadeAnimation.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GameScreen.h" />
@@ -173,7 +173,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardAnimation.cpp" />
     <ClCompile Include="EndScreen.cpp" />
-    <ClCompile Include="FadeInAnimation.cpp" />
+    <ClCompile Include="FadeAnimation.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GameScreen.cpp" />

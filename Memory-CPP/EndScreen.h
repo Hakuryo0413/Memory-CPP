@@ -16,10 +16,12 @@ public:
 private:
 	void renderPlayerList(sf::RenderWindow & window);
 	void renderPlayAgainButton(sf::RenderWindow & window);
+	void updatePlayerList(sf::Time deltaTime);
 	void displayPlayerScores();
 	void sortPlayers();
 	void setWinner();
 	void positionTags();
+	void fadeInPlayerList();
 	static bool sortByScore(const Player * firstPlayer, const Player * const secondPlayer);
 	std::vector<Player *> players;
 };

@@ -5,6 +5,7 @@ StartScreen::StartScreen(StateManager * stateManager) :
 	GameScreen(stateManager)
 {
 	players.push_back(new Player("Tihana"));
+	players.push_back(new Player("Ivan"));
 	boardSize = { 4, 4 };
 }
 
