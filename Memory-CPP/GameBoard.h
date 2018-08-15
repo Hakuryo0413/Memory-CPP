@@ -6,6 +6,7 @@
 #include "EndScreen.h"
 #include "Card.h"
 #include "Player.h"
+#include "SetTimeout.h"
 
 class GameBoard :
 	public GameScreen
@@ -36,10 +37,9 @@ private:
 
 	Card* cardClicked(sf::Vector2f mousePosition);
 	void handleCardClick(Card * clickedCard);
-	void resolvePair();
+	void resolvePair(bool isPair);
 	void finishGame();
 
-	bool resolving;
+	SetTimeout * resolveTimeout;
 	sf::Time resolveDelayTime;
-	sf::Time elapsedTime;
 };

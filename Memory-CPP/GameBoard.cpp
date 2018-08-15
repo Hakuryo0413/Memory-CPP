@@ -5,9 +5,8 @@
 GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
 	currentPlayer(stateManager->gameSettings->players[0]),
-	resolving(false),
-	resolveDelayTime(sf::seconds(1)),
-	elapsedTime(sf::Time::Zero)
+	resolveDelayTime(sf::seconds(0.7)),
+	resolveTimeout(new SetTimeout())
 {
 	deck = createDeck(stateManager->gameSettings->boardSize);
 	players = stateManager->getPlayers();
@@ -16,6 +15,7 @@ GameBoard::GameBoard(StateManager * stateManager) :
 
 GameBoard::~GameBoard()
 {
+	delete resolveTimeout;
 }
 
 void GameBoard::renderScreen(sf::RenderWindow &window)
@@ -26,22 +26,13 @@ void GameBoard::renderScreen(sf::RenderWindow &window)
 
 void GameBoard::updateScreen(sf::Time deltaTime)
 {
-	if (resolving)
-	{
-		elapsedTime += deltaTime;
-		if (elapsedTime >= resolveDelayTime)
-		{
-			elapsedTime = sf::Time::Zero;
-			resolving = false;
-			resolvePair();
-		}
-	}
+	resolveTimeout->update(deltaTime);
 	updateDeck(deltaTime);
 }
 
 void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 {
-	if (resolving)		// disable click events while resolving
+	if (resolveTimeout->delaying)		// disable click events while resolving
 	{
 		return;
 	}
@@ -156,18 +147,25 @@ void GameBoard::handleCardClick(Card * clickedCard)
 
 	if (revealedCards.size() == 2)				// when two cards are revealed, start resolving with time delay
 	{
-		resolving = true;
+		if (revealedCards[0]->getSuit() == revealedCards[1]->getSuit())			// check if the two card are a pair
+		{
+			auto callback = std::bind(&GameBoard::resolvePair, this, true);
+			sf::Time resolveDelayTime = sf::seconds(0.5);
+			resolveTimeout->startTimeout(resolveDelayTime, callback);
+
+		}
+		else
+		{
+			auto callback = std::bind(&GameBoard::resolvePair, this, false);
+			sf::Time resolveDelayTime = sf::seconds(1);
+			resolveTimeout->startTimeout(resolveDelayTime, callback);
+		}
 	}
-	//else if (revealedCards.size() > 2)
-	//{
-	//	revealedCards.erase(revealedCards.begin() + 1, revealedCards.end());
-	//	resolving = true;
-	//}
 }
 
-void GameBoard::resolvePair()
+void GameBoard::resolvePair(bool isPair)
 {
-	if (revealedCards[0]->getSuit() == revealedCards[1]->getSuit())
+	if (isPair)
 	{
 		solvedCards.insert(solvedCards.end(), revealedCards.begin(), revealedCards.end());
 		revealedCards.clear();
