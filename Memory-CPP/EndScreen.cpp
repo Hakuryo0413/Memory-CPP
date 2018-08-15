@@ -79,7 +79,7 @@ void EndScreen::fadeInPlayerList()
 {
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		//players[i]->fadePlayer(true, Player::PlayerComponents::All);
+		players[i]->fadePlayer(true, Player::PlayerComponents::All);
 	}
 }
 

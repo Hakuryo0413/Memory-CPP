@@ -24,6 +24,8 @@ void FadeAnimation::startAnimation(bool direction)
 
 void FadeAnimation::applyTransformation()
 {
-	float scale = 1.f - elapsedTime / (animationDuration);
-	animated->setFillColor(sf::Color(255, 255, 255, sf::Uint8(std::sin(scale * pi / 2))));
+	sf::Uint8 startAlpha = 0;
+	sf::Uint8 endAlpha = 255;
+	sf::Uint8 alpha = startAlpha + float(endAlpha - startAlpha) * elapsedTime / animationDuration;
+	animated->setFillColor(sf::Color(255, 255, 255, alpha));
 };
