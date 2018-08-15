@@ -170,7 +170,6 @@
     <ClInclude Include="AssetManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardAnimation.cpp" />
     <ClCompile Include="EndScreen.cpp" />
@@ -200,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="data\fonts\Beleren-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Animation.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

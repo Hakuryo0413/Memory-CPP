@@ -27,7 +27,7 @@ void Card::renderCard(sf::RenderWindow &window)
 
 void Card::updateCard(sf::Time deltaTime)
 {
-	cardAnimation->updateSprite(deltaTime);
+	cardAnimation->updateAnimated(deltaTime);
 }
 
 void Card::setPosition(sf::Vector2u deckPosition)

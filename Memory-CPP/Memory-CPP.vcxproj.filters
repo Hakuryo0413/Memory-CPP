@@ -95,9 +95,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FadeInAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,5 +126,10 @@
     <Font Include="data\fonts\Beleren-Bold.ttf">
       <Filter>Resource Files</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Animation.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

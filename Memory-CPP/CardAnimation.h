@@ -2,11 +2,11 @@
 #include "Animation.h"
 
 class CardAnimation :
-	public Animation
+	public Animation<sf::Sprite>
 {
 public:
 	CardAnimation();
-	CardAnimation(sf::Sprite * sprite, sf::Time animationDuration, sf::Texture * cardTexture);
+	CardAnimation(sf::Sprite * animated, sf::Time animationDuration, sf::Texture * cardTexture);
 	~CardAnimation();
 
 	virtual void stopAnimation();

@@ -6,8 +6,8 @@ FadeInAnimation::FadeInAnimation() :
 {
 }
 
-FadeInAnimation::FadeInAnimation(sf::Sprite * sprite, sf::Time animationDuration) :
-  Animation(sprite, animationDuration)
+FadeInAnimation::FadeInAnimation(sf::Text * animated, sf::Time animationDuration) :
+  Animation(animated, animationDuration)
 {
 }
 
@@ -18,5 +18,5 @@ FadeInAnimation::~FadeInAnimation()
 void FadeInAnimation::applyTransformation()
 {
   float scale = 1.f - elapsedTime / (animationDuration);
-  sprite->setColor(sf::Color(255, 255, 255, std::sin(scale * pi / 2)));
+  animated->setFillColor(sf::Color(255, 255, 255, sf::Uint8(std::sin(scale * pi / 2))));
 };

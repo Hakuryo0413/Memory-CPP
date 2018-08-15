@@ -2,11 +2,11 @@
 #include "Animation.h"
 
 class FadeInAnimation :
-	public Animation
+	public Animation<sf::Text>
 {
 public:
 	FadeInAnimation();
-	FadeInAnimation(sf::Sprite * sprite, sf::Time animationDuration);
+	FadeInAnimation(sf::Text * animated, sf::Time animationDuration);
 	~FadeInAnimation();
 
 private:
