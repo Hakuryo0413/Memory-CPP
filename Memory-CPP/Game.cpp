@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 
-Game::Game() : 
+Game::Game() :
 	window(sf::VideoMode(WIDTH, HEIGHT), "Memory"),
 	stateManager(new StateManager())
 {
@@ -48,7 +48,7 @@ void Game::processInput()
 			}
 			break;
 		case sf::Event::TextEntered:
-			handleTextEntry();
+			handleTextEntry(event.Text.Unicode);
 			break;
 		case sf::Event::Closed:
 			window.close();
@@ -81,8 +81,9 @@ void Game::handleMouseClick(sf::Vector2f mousePosition)
 	stateManager->currentScreen->handleMouseClick(mousePosition);
 }
 
-void Game::handleTextEntry()
+void Game::handleTextEntry(sf::Event::TextEvent textEvent)
 {
+	stateManager->currentScreen->handleTextEntry(textEvent);
 }
 
 void Game::handleEnterPressed()

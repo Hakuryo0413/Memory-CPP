@@ -18,6 +18,10 @@ void GameScreen::handleMouseClick(sf::Vector2f mousePosition)
 {
 }
 
+void GameScreen::handleTextEntry(sf::Event::TextEvent textEvent)
+{
+}
+
 void GameScreen::handleEnterPressed()
 {
 }
