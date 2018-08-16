@@ -48,7 +48,7 @@ void Game::processInput()
 			}
 			break;
 		case sf::Event::TextEntered:
-			handleTextEntry(event.Text.Unicode);
+			handleTextEntry(event.text);
 			break;
 		case sf::Event::Closed:
 			window.close();
@@ -66,7 +66,7 @@ void Game::update(sf::Time deltaTime)
 
 void Game::render()
 {
-	window.clear();
+	window.clear(sf::Color(135, 136, 150, 255));
 	renderScreen();
 	window.display();
 }

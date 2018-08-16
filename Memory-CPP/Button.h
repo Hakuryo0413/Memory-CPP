@@ -1,8 +1,8 @@
 
 #pragma once
-#include <functional>
 #include "Widget.h"
 #include "AssetManager.h"
+#include <functional>
 
 class Button : public Widget
 {

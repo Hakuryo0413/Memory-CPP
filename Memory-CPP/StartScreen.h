@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include "GameScreen.h"
 #include "GameBoard.h"
 #include "Player.h"
@@ -24,7 +25,7 @@ private:
 
 	void renderWidgets(sf::RenderWindow &window);
 	void renderLabels(sf::RenderWindow &window);
-	void renderPlayerList(sf::RenderWindow & window);
+	void renderPlayerList(sf::RenderWindow &window);
 
 	Widget* widgetClicked(sf::Vector2f mousePosition);
 
@@ -33,6 +34,9 @@ private:
 	std::vector<Player *> players;
 	sf::Vector2u boardSize;
 
+	sf::Text * boardWidth;
+	sf::Text * boardHeight;
+
 	void decrementBoardWidth();
 	void incrementBoardWidth();
 	void decrementBoardHeight();
@@ -40,6 +44,6 @@ private:
 	void createNewPlayer();
 
 	std::string playerInput;
-	std::string playerText;
+	sf::Text playerText;
 };
 

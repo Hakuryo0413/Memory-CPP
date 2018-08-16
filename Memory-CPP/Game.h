@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "StartScreen.h"
 
-#define WIDTH 600
+#define WIDTH 1200
 #define HEIGHT 800
 #define FRAMERATE 60
 

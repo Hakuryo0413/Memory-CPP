@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardAnimation.h" />
     <ClInclude Include="EndScreen.h" />
@@ -168,8 +169,10 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="Widget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardAnimation.cpp" />
     <ClCompile Include="EndScreen.cpp" />
@@ -189,6 +192,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\graphics\AirCard(90x160).png" />

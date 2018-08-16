@@ -16,4 +16,4 @@ public:
 	virtual void handleMouseClick() = 0;
 protected:
 	bool selected;
-}
+};
