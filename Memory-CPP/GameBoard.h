@@ -28,7 +28,7 @@ private:
 	std::vector<Card*> createDeck(sf::Vector2u boardSize);
 
 	std::vector<Player *> players;
-	Player * currentPlayer;
+	unsigned currentPlayer;
 	void callNextPlayer();
 
 	void renderDeck(sf::RenderWindow &window);
