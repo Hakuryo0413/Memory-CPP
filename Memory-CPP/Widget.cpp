@@ -2,7 +2,6 @@
 #include "Widget.h"
 
 Widget::Widget()
-	: selected(false)
 {
 }
 
@@ -10,17 +9,53 @@ Widget::~Widget()
 {
 }
 
-bool Widget::isSelected() const
+void Widget::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	return selected;
+	states.transform *= getTransform();
+  for(size_t i = 0; i < components.size(); i++)
+  {
+    target.draw(*components[i], states);
+  }
 }
 
-void Widget::select()
+bool Widget::isClicked(sf::Vector2f mousePosition)
 {
-	selected = true;
+  for(size_t i = 0; i < components.size(); i++)
+  {
+    if (components[i]->isSelectable())
+    {
+      return components[i]->isClicked(mousePosition);
+      // add transform?
+    }
+  }
 }
 
-void Widget::deselect()
+void Widget::handleMouseClick(sf::Vector2f mousePosition)
 {
-	selected = false;
+  for(size_t i = 0; i < components.size(); i++)
+  {
+    if (components[i]->isSelectable() && components[i]->isClicked(mousePosition))
+    {
+      components[i]->handleMouseClick();
+      // add transform?
+    }
+  }
+}
+
+void Widget::handleTextEntry(sf::Event::TextEvent textEntry)
+{
+  if (!supportsTextEntry)
+  {
+    return;
+  }
+}
+
+void Widget::positionRow(std::vector<GUIComponent *> & widgetRow, sf::Vector2f startPosition)
+{
+  float rowWidth = startPosition.x;
+  for(size_t i = 0; i < widgetRow.size(); i++)
+  {
+    widgetRow[i]->setPosition(rowWidth, startPosition.y);
+    rowWidth += widgetRow[i]->getSize().x;
+  }
 }

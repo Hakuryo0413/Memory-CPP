@@ -20,6 +20,18 @@
     "set": "cpp",
     "string": "cpp",
     "string_view": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "__locale": "cpp",
+    "__functional_base": "cpp",
+    "atomic": "cpp",
+    "bitset": "cpp",
+    "chrono": "cpp",
+    "limits": "cpp",
+    "locale": "cpp",
+    "memory": "cpp",
+    "random": "cpp",
+    "ratio": "cpp",
+    "system_error": "cpp",
+    "tuple": "cpp"
   }
 }

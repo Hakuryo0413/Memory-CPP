@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "StartScreen.h"
-#include "Button.h"
-#include <iostream>
+#include "Counter.h"
+#include "AddTextItem.h"
+#include "TextInput.h"
 
 StartScreen::StartScreen(StateManager * stateManager) :
 	GameScreen(stateManager),
@@ -20,39 +21,42 @@ sf::Font & StartScreen::labelFont = AssetManager::getInstance()->getFont("Belere
 
 void StartScreen::createGUI()
 {
-	labels.push_back(createLabel("Playing board width: ", {50.f, 100.f}));
-	widgets.push_back(createButton("-", std::bind(&StartScreen::decrementBoardWidth, this), {50.f, 200.f}));
-	boardWidth = createLabel(std::to_string(boardSize.x), { 120.f, 205.f });
-	labels.push_back(boardWidth);
-	widgets.push_back(createButton("+", std::bind(&StartScreen::incrementBoardWidth, this), {150.f, 200.f}));
-	labels.push_back(createLabel("Playing board height: ", {500.f, 100.f}));
-	widgets.push_back(createButton("-", std::bind(&StartScreen::decrementBoardHeight, this), {500.f, 200.f}));
-	boardHeight = createLabel(std::to_string(boardSize.x), { 570.f, 205.f });
-	labels.push_back(boardHeight);
-	widgets.push_back(createButton("+", std::bind(&StartScreen::incrementBoardHeight, this), {600.f, 200.f}));
-	labels.push_back(createLabel("Add Player", {50.f, 300.f}));
-	widgets.push_back(createButton("+", std::bind(&StartScreen::createNewPlayer, this), {200.f, 300.f}));
-	labels.push_back(createLabel("Players: ", {50.f, 400.f}));
+	createCounter(& boardSize.x, "Playing board width: ", {50.f, 100.f});
+	createCounter(& boardSize.y, "Playing board height: ", {500.f, 100.f});
+	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this), {200.f, 300.f});
+	// labels.push_back(createLabel("Playing board width: ", {50.f, 100.f}));
+	// widgets.push_back(createButton("-", std::bind(&StartScreen::decrementBoardWidth, this), {50.f, 200.f}));
+	// boardWidth = createLabel(std::to_string(boardSize.x), { 120.f, 205.f });
+	// labels.push_back(boardWidth);
+	// widgets.push_back(createButton("+", std::bind(&StartScreen::incrementBoardWidth, this), {150.f, 200.f}));
+	// labels.push_back(createLabel("Playing board height: ", {500.f, 100.f}));
+	// widgets.push_back(createButton("-", std::bind(&StartScreen::decrementBoardHeight, this), {500.f, 200.f}));
+	// boardHeight = createLabel(std::to_string(boardSize.x), { 570.f, 205.f });
+	// labels.push_back(boardHeight);
+	// widgets.push_back(createButton("+", std::bind(&StartScreen::incrementBoardHeight, this), {600.f, 200.f}));
+	// labels.push_back(createLabel("Add Player", {50.f, 300.f}));
+	// widgets.push_back(createButton("+", std::bind(&StartScreen::createNewPlayer, this), {200.f, 300.f}));
+	// labels.push_back(createLabel("Players: ", {50.f, 400.f}));
 }
 
-sf::Text * StartScreen::createLabel(std::string labelText, sf::Vector2f labelPosition)
+void StartScreen::createCounter(unsigned * value, std::string labelText, sf::Vector2f widgetPosition)
 {
-	sf::Text * label = new sf::Text(labelText, labelFont);
-	label->setPosition(labelPosition);
-	return label;
+	Widget * counter = new Counter(value, labelText);
+	counter->setPosition(widgetPosition);
+	widgets.push_back(counter);
 }
 
-Widget * StartScreen::createButton(std::string btnText, std::function<void()> callback, sf::Vector2f widgetPosition)
+void StartScreen::createAddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback, sf::Vector2f widgetPosition)
 {
-	Widget * widget = new Button(btnText, callback);
-	widget->setPosition(widgetPosition);
-	return widget;
+	Widget * addTextItem = new AddTextItem(labelText, addItemCallback);
+	addTextItem->setPosition(widgetPosition);
+	widgets.push_back(addTextItem);
+	textInputs.push_back(addTextItem);
 }
 
 void StartScreen::renderScreen(sf::RenderWindow &window)
 {
 	renderWidgets(window);
-	renderLabels(window);
 	renderPlayerList(window);
 }
 
@@ -62,17 +66,19 @@ void StartScreen::updateScreen(sf::Time deltaTime)
 
 void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 {
-	Widget * clickedWidget = widgetClicked(mousePosition);
-	if (clickedWidget)
+
+	for(size_t i = 0; i < widgets.size(); i++)
 	{
-		clickedWidget->handleMouseClick();
+		widgets[i]->handleMouseClick(mousePosition);
 	}
 }
 
 void StartScreen::handleTextEntry(sf::Event::TextEvent textEvent)
 {
-	playerInput += textEvent.unicode;
-	playerText.setString(playerInput);
+	for(size_t i = 0; i < textInputs.size(); i++)
+	{
+		textInputs[i]->handleTextEntry(textEvent);
+	}
 }
 
 void StartScreen::handleEnterPressed()
@@ -92,14 +98,6 @@ void StartScreen::renderWidgets(sf::RenderWindow &window)
 	}
 }
 
-void StartScreen::renderLabels(sf::RenderWindow &window)
-{
-	for (size_t i = 0; i < labels.size(); i++)
-	{
-		window.draw(*labels[i]);
-	}
-}
-
 void StartScreen::renderPlayerList(sf::RenderWindow &window)
 {
 	for (size_t i = 0; i < players.size(); i++)
@@ -108,46 +106,8 @@ void StartScreen::renderPlayerList(sf::RenderWindow &window)
 	}
 }
 
-Widget * StartScreen::widgetClicked(sf::Vector2f mousePosition)
+void StartScreen::createNewPlayer(std::string newPlayerName)
 {
-	for (size_t i = 0; i < widgets.size(); i++)
-	{
-		if (widgets[i]->isClicked(mousePosition))
-		{
-			return widgets[i];
-			break;
-		}
-	}
-	return nullptr;
-}
-
-void StartScreen::decrementBoardWidth()
-{
-	boardSize.x++;
-	boardWidth->setString(std::to_string(boardSize.x));
-	std::cout << boardSize.x << std::endl;
-}
-
-void StartScreen::incrementBoardWidth()
-{
-	boardSize.x--;
-	boardWidth->setString(std::to_string(boardSize.x));
-}
-
-void StartScreen::decrementBoardHeight()
-{
-	boardSize.y++;
-	boardWidth->setString(std::to_string(boardSize.y));
-}
-
-void StartScreen::incrementBoardHeight()
-{
-	boardSize.y--;
-	boardWidth->setString(std::to_string(boardSize.y));
-}
-
-void StartScreen::createNewPlayer()
-{
-	// Player * newPlayer = new Player();
-	// players.push_back(player);
+	Player * newPlayer = new Player(newPlayerName);
+	players.push_back(newPlayer);
 }

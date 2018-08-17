@@ -1,17 +1,19 @@
 
 #pragma once
-#include "Widget.h"
+#include "GUIComponent.h"
 #include "AssetManager.h"
 #include <functional>
 
-class Button : public Widget
+class Button : public GUIComponent
 {
 public:
     Button(std::string btnText, std::function<void()> callback);
 	~Button();
 
+	bool isSelectable();
 	virtual bool isClicked(sf::Vector2f mousePosition);
 	virtual void handleMouseClick();
+	virtual sf::Vector2f getSize();
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::function<void()> callback;
@@ -19,6 +21,6 @@ private:
 	static sf::Texture & buttonTexture;
 	static sf::Font & buttonFont;
 
-	sf::Sprite sprite;
+	sf::RectangleShape shape;
 	sf::Text text;
 };
