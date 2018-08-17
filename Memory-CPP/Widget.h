@@ -1,18 +1,20 @@
 #pragma once
 #include "GUIComponent.h"
 
-class Widget : public sf::Drawable, public sf::Transformable
+class Widget : public GUIComponent
 {
 public:
-  Widget();
-  ~Widget();
+	Widget();
+	~Widget();
 
+	virtual bool isSelectable();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-  virtual bool isClicked(sf::Vector2f mousePosition);
+	virtual bool isClicked(sf::Vector2f mousePosition);
 	virtual void handleMouseClick(sf::Vector2f mousePosition);
-  virtual void handleTextEntry(sf::Event::TextEvent textEntry);
+	virtual void handleTextEntry(sf::Event::TextEvent textEntry);
 protected:
-  bool supportsTextEntry;
-  std::vector<GUIComponent *> components;
-  virtual void positionRow(std::vector<GUIComponent *> & widgetRow, sf::Vector2f startPosition);
+	bool supportsTextEntry;
+	std::vector<GUIComponent *> components;
+	std::vector<GUIComponent *> secondRow;
+	virtual void positionRow(std::vector<GUIComponent *> & widgetRow, sf::Vector2f startPosition);
 };

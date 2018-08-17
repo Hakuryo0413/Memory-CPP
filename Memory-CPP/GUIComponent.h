@@ -9,7 +9,8 @@ public:
 	~GUIComponent();
 
 	virtual bool isSelectable() = 0;
-	virtual bool isClicked(sf::Vector2f mousePosition);
-	virtual void handleMouseClick();
-	virtual sf::Vector2f getSize() = 0;
+	virtual bool isClicked(sf::Vector2f mousePosition, sf::Transform parentTransform);
+	virtual void handleMouseClick(sf::Vector2f mousePosition);
+	virtual void handleTextEntry(sf::Event::TextEvent textEntry);
+	virtual sf::Vector2f getSize();
 };

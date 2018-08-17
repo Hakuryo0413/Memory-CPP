@@ -5,14 +5,14 @@ AddTextItem::AddTextItem(std::string labelText, std::function<void(std::string t
   Widget(),
   label(new Label(labelText)),
   addButton(new Button("+", std::bind(&AddTextItem::submitNewItem, this))),
-  textInput(),
+  textInput(new TextInput()),
   addItemCallback(addItemCallback)
 {
   components = { label, textInput, addButton };
+  secondRow = { components.begin() + 1, components.end() };
 
-  sf::Vector2f rowStartPosition(50.f, label->getSize().y);
-  std::vector<GUIComponent *> widgetRow (components.begin() + 1, components.end());
-  positionRow(widgetRow, rowStartPosition);
+  sf::Vector2f rowStartPosition(10.f, label->getSize().y + 20.f);
+  positionRow(secondRow, rowStartPosition);
 }
 
 AddTextItem::~AddTextItem()

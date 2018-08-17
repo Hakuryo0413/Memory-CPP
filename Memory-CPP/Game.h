@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "StartScreen.h"
 
-#define WIDTH 1200
-#define HEIGHT 800
+#define WIDTH 1024
+#define HEIGHT 768
 #define FRAMERATE 60
 
 class StateManager;

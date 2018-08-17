@@ -1,9 +1,10 @@
 #pragma once
 #include <functional>
 #include "GameScreen.h"
+#include "SetTimeout.h"
 #include "GameBoard.h"
 #include "Player.h"
-#include "Widget.h"
+#include "GUIComponent.h"
 
 class TextInput;
 
@@ -20,21 +21,26 @@ public:
 	void handleEnterPressed();
 private:
 	void createGUI();
+	void createLabel(std::string labelText, sf::Vector2f labelPosition);
+	void createButton(std::string labelText, std::function<void()> callback,sf::Vector2f buttonPosition);
 	void createCounter(unsigned * value, std::string labelText, sf::Vector2f widgetPosition);
 	void createAddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback, sf::Vector2f widgetPosition);
 
-	static sf::Font & labelFont;
-
 	void renderWidgets(sf::RenderWindow &window);
-	void renderLabels(sf::RenderWindow &window);
 	void renderPlayerList(sf::RenderWindow &window);
 
-	std::vector<Widget *> widgets;
-	std::vector<Widget *> textInputs;
+	float playerListHeight;
+	float playerListIndent;
+
+	std::vector<GUIComponent *> widgets;
+	std::vector<GUIComponent *> textInputs;
 	std::vector<Player *> players;
 	sf::Vector2u boardSize;
 
-	void changeBoardSize(bool direction);
+	SetTimeout * errorMessageTimeout;
+	void removeErrorMessage();
+
 	void createNewPlayer(std::string newPlayerName);
+	void startGame();
 };
 

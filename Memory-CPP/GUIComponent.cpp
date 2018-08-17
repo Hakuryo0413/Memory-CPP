@@ -2,7 +2,6 @@
 #include "GUIComponent.h"
 
 GUIComponent::GUIComponent()
-	: selected(false)
 {
 }
 
@@ -15,31 +14,22 @@ bool GUIComponent::isSelectable()
 	return false;
 }
 
-bool GUIComponent::isClicked(sf::Vector2f mousePosition)
+bool GUIComponent::isClicked(sf::Vector2f mousePosition, sf::Transform parentTransform)
 {
-	if (!isSelectable())
-	{
-		return false;
-	}
+	return false;
 }
 
-bool GUIComponent::isSelected() const
+void GUIComponent::handleMouseClick(sf::Vector2f mousePosition)
 {
-	return selected;
+
 }
 
-void GUIComponent::select()
+void GUIComponent::handleTextEntry(sf::Event::TextEvent textEntry)
 {
-	selected = true;
 }
 
-void GUIComponent::deselect()
+sf::Vector2f GUIComponent::getSize()
 {
-	selected = false;
-}
-
-void GUIComponent::handleMouseClick()
-{
-
+	return sf::Vector2f();
 }
 

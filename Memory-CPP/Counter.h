@@ -10,6 +10,7 @@ public:
   ~Counter();
 
   void setLabel(std::string text);
+  virtual sf::Vector2f getSize();
 private:
   unsigned * value;
   void incrementValue();

@@ -20,6 +20,7 @@ GameBoard::~GameBoard()
 
 void GameBoard::renderScreen(sf::RenderWindow &window)
 {
+	GameScreen::renderScreen(window);
 	renderDeck(window);
 	renderPlayers(window);
 }

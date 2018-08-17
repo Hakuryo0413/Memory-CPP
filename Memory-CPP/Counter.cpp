@@ -1,19 +1,20 @@
 #include "stdafx.h"
 #include "Counter.h"
 
-Counter::Counter(int * value, std::string labelText) :
-  Widget(),
-  value(value),
-  label(new Label(labelText)),
-  incrementButton(new Button("+", std::bind(std::bind(&Counter::incrementValue, this)))),
-  decrementButton(new Button("-", std::bind(std::bind(&Counter::decrementValue, this)))),
-  valueIndicator(new Label(std::to_string(*value)))
+Counter::Counter(unsigned * value, std::string labelText) :
+	Widget(),
+	value(value),
+	label(new Label(labelText)),
+	valueIndicator(new Label(std::to_string(*value)))
 {
-  components = { label, incrementButton, valueIndicator, decrementButton };
+	decrementButton = new Button("-", std::bind(std::bind(&Counter::decrementValue, this)));
+	incrementButton = new Button("+", std::bind(std::bind(&Counter::incrementValue, this)));
 
-  sf::Vector2f rowStartPosition(50.f, label->getSize().y);
-  std::vector<GUIComponent *> widgetRow (components.begin() + 1, components.end());
-  positionRow(widgetRow, rowStartPosition);
+	components = { label, decrementButton, valueIndicator, incrementButton };
+	secondRow = { components.begin() + 1, components.end() };
+
+	sf::Vector2f rowStartPosition(10.f, label->getSize().y + 20.f);
+	positionRow(secondRow, rowStartPosition);
 }
 
 Counter::~Counter()
@@ -22,17 +23,27 @@ Counter::~Counter()
 
 void Counter::setLabel(std::string text)
 {
-  label->setText(text);
+	label->setText(text);
+}
+
+sf::Vector2f Counter::getSize()
+{
+	sf::Vector2f size;
+	
+	return sf::Vector2f();
 }
 
 void Counter::incrementValue()
 {
-  *value++;
-  valueIndicator->setText(std::to_string(*value));
+	(*value)++;
+	valueIndicator->setText(std::to_string(*value));
 }
 
 void Counter::decrementValue()
 {
-  *value--;
-  valueIndicator->setText(std::to_string(*value));
+	if (*value > 1)
+	{
+		(*value)--;
+		valueIndicator->setText(std::to_string(*value));
+	}
 }

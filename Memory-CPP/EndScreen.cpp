@@ -14,6 +14,7 @@ EndScreen::~EndScreen()
 
 void EndScreen::renderScreen(sf::RenderWindow & window)
 {
+	GameScreen::renderScreen(window);
 	renderPlayerList(window);
 	renderPlayAgainButton(window);
 }
