@@ -37,7 +37,7 @@ private:
 	std::vector<Player *> players;
 	sf::Vector2u boardSize;
 
-	SetTimeout * errorMessageTimeout;
+	SetTimeout * timeout;
 	void removeErrorMessage();
 
 	void createNewPlayer(std::string newPlayerName);

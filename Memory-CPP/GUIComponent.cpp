@@ -14,6 +14,10 @@ bool GUIComponent::isSelectable()
 	return false;
 }
 
+void GUIComponent::update(sf::Time deltaTime)
+{
+}
+
 bool GUIComponent::isClicked(sf::Vector2f mousePosition)
 {
 	return false;

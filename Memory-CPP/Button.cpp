@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Button.h"
-#include <iostream>
 
 Button::Button(std::string btnText, std::function<void()> callback) :
 	GUIComponent(),
 	callback(callback),
-	text(btnText, buttonFont)
+	text(btnText, buttonFont),
+	timeout(new SetTimeout()),
+	active(false)
 {
 	sf::FloatRect textBounds = text.getLocalBounds();
 
@@ -26,6 +27,7 @@ Button::Button(std::string btnText, std::function<void()> callback) :
 
 Button::~Button()
 {
+	delete timeout;
 }
 
 sf::Font & Button::buttonFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
@@ -34,6 +36,11 @@ sf::Texture & Button::buttonTexture = AssetManager::getInstance()->getTexture("B
 bool Button::isSelectable()
 {
 	return true;
+}
+
+void Button::update(sf::Time deltaTime)
+{
+	timeout->update(deltaTime);
 }
 
 bool Button::isClicked(sf::Vector2f mousePosition)
@@ -51,9 +58,11 @@ bool Button::isClicked(sf::Vector2f mousePosition, const sf::Transform & parentT
 
 void Button::handleMouseClick(sf::Vector2f mousePosition)
 {
-	if (isClicked(mousePosition))
+	if (isClicked(mousePosition) && !timeout->delaying)
 	{
 		callback();
+		toggleActive();
+		timeout->startTimeout(sf::seconds(0.3), std::bind(&Button::toggleActive, this));
 	}
 }
 
@@ -62,6 +71,8 @@ void Button::handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & 
 	if (isClicked(mousePosition, parentTransform))
 	{
 		callback();
+		toggleActive();
+		timeout->startTimeout(sf::seconds(0.3), std::bind(&Button::toggleActive, this));
 	}
 }
 
@@ -75,4 +86,18 @@ void Button::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	states.transform *= getTransform();
 	target.draw(shape, states);
 	target.draw(text, states);
+}
+
+void Button::toggleActive()
+{
+	if (!active)
+	{
+		shape.setOutlineThickness(-1.f);
+		active = true;
+	}
+	else
+	{
+		shape.setOutlineThickness(1.f);
+		active = false;
+	}
 }

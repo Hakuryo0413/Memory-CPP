@@ -9,6 +9,7 @@ public:
 	~GUIComponent();
 
 	virtual bool isSelectable() = 0;
+	virtual void update(sf::Time deltaTime);
 	virtual bool isClicked(sf::Vector2f mousePosition);
 	virtual bool isClicked(sf::Vector2f mousePosition, const sf::Transform & parentTransform);
 	virtual void handleMouseClick(sf::Vector2f mousePosition);

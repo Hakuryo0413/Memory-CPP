@@ -1,8 +1,9 @@
 
 #pragma once
+#include <functional>
 #include "GUIComponent.h"
 #include "AssetManager.h"
-#include <functional>
+#include "SetTimeout.h"
 
 class Button : public GUIComponent
 {
@@ -10,7 +11,8 @@ public:
     Button(std::string btnText, std::function<void()> callback);
 	~Button();
 
-	bool isSelectable();
+	virtual bool isSelectable();
+	virtual void update(sf::Time deltaTime);
 	virtual bool isClicked(sf::Vector2f mousePosition);
 	virtual bool isClicked(sf::Vector2f mousePosition, const sf::Transform & parentTransform);
 	virtual void handleMouseClick(sf::Vector2f mousePosition);
@@ -25,4 +27,8 @@ private:
 
 	sf::RectangleShape shape;
 	sf::Text text;
+
+	SetTimeout * timeout;
+	void toggleActive();
+	bool active;
 };

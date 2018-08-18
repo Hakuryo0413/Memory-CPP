@@ -8,7 +8,7 @@
 StartScreen::StartScreen(StateManager * stateManager) :
 	GameScreen(stateManager),
 	boardSize(4, 4),
-	errorMessageTimeout(new SetTimeout),
+	timeout(new SetTimeout),
 	playerListHeight(500.f),
 	playerListIndent(500.f),
 	settingsValidated(false)
@@ -22,7 +22,7 @@ StartScreen::~StartScreen()
 	{
 		delete GUIComponents[i];
 	}
-	delete errorMessageTimeout;
+	delete timeout;
 }
 
 void StartScreen::createGUI()
@@ -75,12 +75,16 @@ void StartScreen::renderScreen(sf::RenderWindow &window)
 
 void StartScreen::updateScreen(sf::Time deltaTime)
 {
-	errorMessageTimeout->update(deltaTime);
+	timeout->update(deltaTime);
+	for (size_t i = 0; i < GUIComponents.size(); i++)
+	{
+		GUIComponents[i]->update(deltaTime);
+	}
 }
 
 void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 {
-	if (errorMessageTimeout->delaying)
+	if (timeout->delaying)
 	{
 		return;
 	}
@@ -141,12 +145,12 @@ void StartScreen::validateSettings()
 	if (players.size() == 0)
 	{
 		createLabel("Add at least one player!", { 50.f, 700.f });
-		errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
+		timeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
 	}
 	else if (boardSize.x * boardSize.y % 2)
 	{
 		createLabel("A Memory Game has to have an even number of cards!", { 50.f, 700.f });
-		errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
+		timeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
 	}
 	else
 	{

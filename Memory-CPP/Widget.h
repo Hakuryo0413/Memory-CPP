@@ -8,6 +8,7 @@ public:
 	~Widget();
 
 	virtual bool isSelectable();
+	virtual void update(sf::Time deltaTime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual bool isClicked(sf::Vector2f mousePosition);
 	virtual void handleMouseClick(sf::Vector2f mousePosition);

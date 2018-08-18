@@ -176,7 +176,6 @@ void GameBoard::resolvePair(bool isPair)
 		revealedCards.clear();
 	}
 	callNextPlayer();
-	finishGame();
 }
 
 void GameBoard::finishGame()
