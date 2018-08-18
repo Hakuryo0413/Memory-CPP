@@ -16,13 +16,14 @@ public:
 		EndScreen
 	};
 
-	void switchScreen(Screen nextScreen);
+	void switchScreen(Screen newScreen);
 	std::vector<Player *> getPlayers();
 	void setPlayers(std::vector<Player *> players);
 	void setBoardSize(sf::Vector2u boardSize);
 	void clearSettings();
 
-	GameScreen* currentScreen;
+	GameScreen * currentScreen;
+	GameScreen * nextScreen;
 
 	struct GameSettings
 	{

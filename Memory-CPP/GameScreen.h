@@ -7,7 +7,7 @@ class GameScreen
 public:
 	GameScreen();
 	GameScreen(StateManager * stateManager);
-	~GameScreen();
+	virtual ~GameScreen();
 
 	virtual void renderScreen(sf::RenderWindow &window);
 	virtual void updateScreen(sf::Time deltaTime) = 0;

@@ -13,29 +13,36 @@ StateManager::StateManager() :
 StateManager::~StateManager()
 {
 	delete currentScreen;
+	delete nextScreen;
 	delete gameSettings;
 }
 
-void StateManager::switchScreen(Screen nextScreen)
+void StateManager::switchScreen(Screen newScreen)
 {
-	if (currentScreen != nullptr)
+	if (nextScreen != nullptr)
 	{
-		delete currentScreen;
+		delete nextScreen;
+		nextScreen = nullptr;
 	}
-	
-	switch (nextScreen)
+
+	switch (newScreen)
 	{
 	case Screen::StartScreen:
-		currentScreen = new StartScreen(this);
+		nextScreen = new StartScreen(this);
 		break;
 	case Screen::Gameboard:
-		currentScreen = new GameBoard(this);
+		nextScreen = new GameBoard(this);
 		break;
 	case Screen::EndScreen:
-		currentScreen = new EndScreen(this);
+		nextScreen = new EndScreen(this);
 		break;
 	default:
 		break;
+	}
+
+	if (nextScreen != nullptr)
+	{
+		std::swap(currentScreen, nextScreen);
 	}
 }
 

@@ -41,6 +41,7 @@ private:
 	void removeErrorMessage();
 
 	void createNewPlayer(std::string newPlayerName);
+	bool settingsValidated;
 	void validateSettings();
 	void startGame();
 };

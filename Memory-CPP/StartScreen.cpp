@@ -10,15 +10,19 @@ StartScreen::StartScreen(StateManager * stateManager) :
 	boardSize(4, 4),
 	errorMessageTimeout(new SetTimeout),
 	playerListHeight(500.f),
-	playerListIndent(500.f)
+	playerListIndent(500.f),
+	settingsValidated(false)
 {
 	createGUI();
 }
 
 StartScreen::~StartScreen()
 {
-	// delete[] labels;
-	// delete[] widgets;
+	for (size_t i = 0; i < GUIComponents.size(); i++)
+	{
+		delete GUIComponents[i];
+	}
+	delete errorMessageTimeout;
 }
 
 void StartScreen::createGUI()
@@ -84,6 +88,10 @@ void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 	{
 		GUIComponents[i]->handleMouseClick(mousePosition);
 	}
+	if (settingsValidated)
+	{
+		startGame();
+	}
 }
 
 void StartScreen::handleTextEntry(sf::Event::TextEvent textEvent)
@@ -140,11 +148,10 @@ void StartScreen::validateSettings()
 		createLabel("A Memory Game has to have an even number of cards!", { 50.f, 700.f });
 		errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
 	}
-	//else
-	//{
-	//	startGame();
-
-	//}
+	else
+	{
+		settingsValidated = true;
+	}
 }
 
 void StartScreen::startGame()
