@@ -15,7 +15,7 @@ public:
 	GameBoard(StateManager * stateManager);
 	~GameBoard();
 
-	void renderScreen(sf::RenderWindow &window);
+	void renderScreen(sf::RenderWindow & window);
 	void updateScreen(sf::Time deltaTime);
 	void handleMouseClick(sf::Vector2f mousePosition);
 private:
@@ -28,9 +28,9 @@ private:
 	unsigned currentPlayer;
 	void callNextPlayer();
 
-	void renderDeck(sf::RenderWindow &window);
+	void renderDeck(sf::RenderWindow & window);
 	void updateDeck(sf::Time deltaTime);
-	void renderPlayers(sf::RenderWindow &window);
+	void renderPlayers(sf::RenderWindow & window);
 
 	Card* cardClicked(sf::Vector2f mousePosition);
 	void handleCardClick(Card * clickedCard);

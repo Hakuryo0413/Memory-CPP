@@ -15,6 +15,11 @@ GameBoard::GameBoard(StateManager * stateManager) :
 GameBoard::~GameBoard()
 {
 	delete resolveTimeout;
+	for (size_t i = 0; i < deck.size(); i++)
+	{
+		delete deck[i];
+	}
+	deck.clear();
 }
 
 void GameBoard::renderScreen(sf::RenderWindow &window)
@@ -45,7 +50,7 @@ void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 
 std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 {
-	std::vector<Card*> deck;
+	std::vector<Card *> deck;
 	unsigned deckSize = boardSize.x * boardSize.y;
 	unsigned cardsPerSuit = deckSize / Card::Suit::COUNT;
 	unsigned cardIndex = 0;
@@ -53,7 +58,7 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 	for (unsigned i = 0; i < Card::Suit::COUNT; i++) {
 		for (unsigned j = 0; j < cardsPerSuit; j++)
 		{
-			Card* card = new Card(cardIndex, static_cast<Card::Suit>(i));
+			Card * card = new Card(cardIndex, static_cast<Card::Suit>(i));
 			deck.push_back(card);
 			cardIndex++;
 		}
@@ -125,13 +130,13 @@ Card * GameBoard::cardClicked(sf::Vector2f mousePosition)
 
 void GameBoard::handleCardClick(Card * clickedCard)
 {
-	std::vector<Card*>::iterator itSolved = std::find(solvedCards.begin(), solvedCards.end(), clickedCard);
+	std::vector<Card *>::iterator itSolved = std::find(solvedCards.begin(), solvedCards.end(), clickedCard);
 	if (itSolved != solvedCards.end())			// ignore click on solved cards
 	{
 		return;
 	}
 
-	std::vector<Card*>::iterator itRevealed = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
+	std::vector<Card *>::iterator itRevealed = std::find(revealedCards.begin(), revealedCards.end(), clickedCard);
 	if (itRevealed == revealedCards.end())		// if card not already revealed, reveal it
 	{
 		revealedCards.push_back(clickedCard);

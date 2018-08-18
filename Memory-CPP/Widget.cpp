@@ -7,6 +7,11 @@ Widget::Widget()
 
 Widget::~Widget()
 {
+	for (size_t i = 0; i < components.size(); i++)
+	{
+		delete components[i];
+	}
+	components.clear();
 }
 
 bool Widget::isSelectable()

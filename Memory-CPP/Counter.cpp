@@ -29,7 +29,7 @@ void Counter::setLabel(std::string text)
 sf::Vector2f Counter::getSize()
 {
 	sf::Vector2f size;
-	
+
 	return sf::Vector2f();
 }
 

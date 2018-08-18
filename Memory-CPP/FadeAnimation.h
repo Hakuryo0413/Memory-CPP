@@ -12,5 +12,5 @@ public:
 	void startAnimation(bool direction);
 private:
 	bool fadeDirection;
-	void applyTransformation();
+	virtual void applyTransformation();
 };

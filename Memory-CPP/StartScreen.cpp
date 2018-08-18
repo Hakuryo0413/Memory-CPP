@@ -30,9 +30,9 @@ void StartScreen::createGUI()
 	createLabel("A Game of Memory", { 350.f, 50.f });
 	createLabel("Welcome, Player!", { 360.f, 100.f });
 	createLabel("Please choose the desired board width, and add players!", { 50.f, 200.f });
-	createCounter(& boardSize.x, "Playing board width: ", {50.f, 300.f});
-	createCounter(& boardSize.y, "Playing board height: ", {50.f, 450.f});
-	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this, std::placeholders::_1), {500.f, 300.f});
+	createCounter(&boardSize.x, "Playing board width: ", { 50.f, 300.f });
+	createCounter(&boardSize.y, "Playing board height: ", { 50.f, 450.f });
+	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this, std::placeholders::_1), { 500.f, 300.f });
 	createLabel("Players: ", { 500.f, 450.f });
 	createButton("StartGame", std::bind(&StartScreen::validateSettings, this), { 50.f, 600.f });
 }
@@ -88,7 +88,7 @@ void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 	{
 		return;
 	}
-	for(size_t i = 0; i < GUIComponents.size(); i++)
+	for (size_t i = 0; i < GUIComponents.size(); i++)
 	{
 		GUIComponents[i]->handleMouseClick(mousePosition);
 	}
@@ -100,13 +100,13 @@ void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 
 void StartScreen::handleTextEntry(sf::Event::TextEvent textEvent)
 {
-	for(size_t i = 0; i < textInputs.size(); i++)
+	for (size_t i = 0; i < textInputs.size(); i++)
 	{
 		textInputs[i]->handleTextEntry(textEvent);
 	}
 }
 
-void StartScreen::renderWidgets(sf::RenderWindow &window)
+void StartScreen::renderWidgets(sf::RenderWindow & window)
 {
 	for (size_t i = 0; i < GUIComponents.size(); i++)
 	{
@@ -114,7 +114,7 @@ void StartScreen::renderWidgets(sf::RenderWindow &window)
 	}
 }
 
-void StartScreen::renderPlayerList(sf::RenderWindow &window)
+void StartScreen::renderPlayerList(sf::RenderWindow & window)
 {
 	for (size_t i = 0; i < players.size(); i++)
 	{

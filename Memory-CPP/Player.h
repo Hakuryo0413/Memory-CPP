@@ -17,7 +17,7 @@ public:
 		All
 	};
 
-	void renderPlayer(sf::RenderWindow &window, PlayerComponents component);
+	void renderPlayer(sf::RenderWindow & window, PlayerComponents component);
 	void updatePlayer(sf::Time deltaTime, PlayerComponents component);
 	void fadePlayer(bool direction, PlayerComponents component);		// fade in (true), fade out (false)
 
