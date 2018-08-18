@@ -3,13 +3,16 @@
 
 EndScreen::EndScreen(StateManager * stateManager) :
 	GameScreen(stateManager),
-	players(stateManager->gameSettings->players)
+	players(stateManager->gameSettings->players),
+	playAgainButton(new Button("Play again", std::bind(&EndScreen::restartGame, this)))
 {
+	playAgainButton->setPosition({400.f, 600.f});
 	displayPlayerScores();
 }
 
 EndScreen::~EndScreen()
 {
+	delete playAgainButton;
 }
 
 void EndScreen::renderScreen(sf::RenderWindow & window)
@@ -24,11 +27,11 @@ void EndScreen::updateScreen(sf::Time deltaTime)
 	updatePlayerList(deltaTime);
 }
 
-void EndScreen::handleEnterPressed()
+void EndScreen::handleMouseClick(sf::Vector2f mousePosition)
 {
-	stateManager->clearSettings();
-	stateManager->switchScreen(StateManager::Screen::StartScreen);
+	playAgainButton->handleMouseClick(mousePosition);
 }
+
 
 void EndScreen::displayPlayerScores()
 {
@@ -94,6 +97,7 @@ void EndScreen::renderPlayerList(sf::RenderWindow & window)
 
 void EndScreen::renderPlayAgainButton(sf::RenderWindow & window)
 {
+	window.draw(*playAgainButton);
 }
 
 void EndScreen::updatePlayerList(sf::Time deltaTime)
@@ -102,4 +106,10 @@ void EndScreen::updatePlayerList(sf::Time deltaTime)
 	{
 		players[i]->updatePlayer(deltaTime, Player::PlayerComponents::All);
 	}
+}
+
+void EndScreen::restartGame()
+{
+	stateManager->clearSettings();
+	stateManager->switchScreen(StateManager::Screen::StartScreen);
 }
