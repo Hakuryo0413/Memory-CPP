@@ -14,11 +14,11 @@ class StartScreen :
 public:
 	StartScreen(StateManager * stateManager);
 	~StartScreen();
-	void renderScreen(sf::RenderWindow &window);
-	void updateScreen(sf::Time deltaTime);
-	void handleMouseClick(sf::Vector2f mousePosition);
-	void handleTextEntry(sf::Event::TextEvent textEvent);
-	void handleEnterPressed();
+
+	virtual void renderScreen(sf::RenderWindow &window);
+	virtual void updateScreen(sf::Time deltaTime);
+	virtual void handleMouseClick(sf::Vector2f mousePosition);
+	virtual void handleTextEntry(sf::Event::TextEvent textEvent);
 private:
 	void createGUI();
 	void createLabel(std::string labelText, sf::Vector2f labelPosition);
@@ -32,7 +32,7 @@ private:
 	float playerListHeight;
 	float playerListIndent;
 
-	std::vector<GUIComponent *> widgets;
+	std::vector<GUIComponent *> GUIComponents;
 	std::vector<GUIComponent *> textInputs;
 	std::vector<Player *> players;
 	sf::Vector2u boardSize;
@@ -41,6 +41,7 @@ private:
 	void removeErrorMessage();
 
 	void createNewPlayer(std::string newPlayerName);
+	void validateSettings();
 	void startGame();
 };
 

@@ -26,7 +26,6 @@ private:
 	void renderScreen();
 	void handleMouseClick(sf::Vector2f mousePosition);
 	void handleTextEntry(sf::Event::TextEvent textEvent);
-	void handleEnterPressed();
 
 	StateManager * stateManager;
 };

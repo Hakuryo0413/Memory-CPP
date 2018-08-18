@@ -36,7 +36,13 @@ bool Button::isSelectable()
 	return true;
 }
 
-bool Button::isClicked(sf::Vector2f mousePosition, sf::Transform parentTransform)
+bool Button::isClicked(sf::Vector2f mousePosition)
+{
+	sf::FloatRect globalBounds = getTransform().transformRect(shape.getLocalBounds());
+	return globalBounds.contains(mousePosition);
+}
+
+bool Button::isClicked(sf::Vector2f mousePosition, const sf::Transform & parentTransform)
 {
 	sf::Transform newTransform = getTransform() * parentTransform;
 	sf::FloatRect globalBounds = newTransform.transformRect(shape.getLocalBounds());
@@ -45,7 +51,18 @@ bool Button::isClicked(sf::Vector2f mousePosition, sf::Transform parentTransform
 
 void Button::handleMouseClick(sf::Vector2f mousePosition)
 {
-	callback();
+	if (isClicked(mousePosition))
+	{
+		callback();
+	}
+}
+
+void Button::handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & parentTransform)
+{
+	if (isClicked(mousePosition, parentTransform))
+	{
+		callback();
+	}
 }
 
 sf::Vector2f Button::getSize()

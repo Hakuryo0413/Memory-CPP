@@ -30,7 +30,3 @@ void GameScreen::handleTextEntry(sf::Event::TextEvent textEvent)
 {
 }
 
-void GameScreen::handleEnterPressed()
-{
-}
-

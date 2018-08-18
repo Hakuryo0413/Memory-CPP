@@ -24,7 +24,17 @@ bool TextInput::isSelectable()
 	return true;
 }
 
-bool TextInput::isClicked(sf::Vector2f mousePosition, sf::Transform parentTransform)
+bool TextInput::isClicked(sf::Vector2f mousePosition)
+{
+	sf::FloatRect globalBounds = getTransform().transformRect(shape.getLocalBounds());
+	if (!globalBounds.contains(mousePosition))
+	{
+		toggleSelected(false);
+	}
+	return globalBounds.contains(mousePosition);
+}
+
+bool TextInput::isClicked(sf::Vector2f mousePosition, const sf::Transform & parentTransform)
 {
 	sf::Transform newTransform = getTransform() * parentTransform;
 	sf::FloatRect globalBounds = newTransform.transformRect(shape.getLocalBounds());
@@ -37,18 +47,44 @@ bool TextInput::isClicked(sf::Vector2f mousePosition, sf::Transform parentTransf
 
 void TextInput::handleMouseClick(sf::Vector2f mousePosition)
 {
-	toggleSelected(true);
+	if (isClicked(mousePosition))
+	{
+		toggleSelected(true);
+	}
+}
+
+void TextInput::handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & parentTransform)
+{
+	if (isClicked(mousePosition, parentTransform))
+	{
+		toggleSelected(true);
+	}
 }
 
 void TextInput::handleTextEntry(sf::Event::TextEvent textEvent)
 {
 	if (selected)
 	{
-		if (playerInput.size() < 7)
+		if (textEvent.unicode == '\b')
 		{
-			playerInput += textEvent.unicode;
-			playerText.setString(playerInput);
+			if (playerInput.size() > 0)
+			{
+				playerInput.pop_back();
+			}
 		}
+		else if (textEvent.unicode == 13)
+		{
+			if (playerInput.size() > 0 && callback != nullptr)
+			{
+				callback();
+				toggleSelected(true);
+			}
+		}
+		else if (textEvent.unicode < 128 && playerInput.size() < 7)
+		{
+			playerInput += static_cast<char>(textEvent.unicode);
+		}
+		playerText.setString(playerInput);
 	}
 }
 
@@ -67,6 +103,11 @@ void TextInput::resetInput()
 	playerInput = "";
 	playerText.setString(playerInput);
 	toggleSelected(false);
+}
+
+void TextInput::setEnterCallback(std::function<void()> enterCallback)
+{
+	callback = enterCallback;
 }
 
 void TextInput::draw(sf::RenderTarget & target, sf::RenderStates states) const

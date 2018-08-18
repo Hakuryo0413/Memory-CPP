@@ -13,7 +13,6 @@ public:
 	virtual void updateScreen(sf::Time deltaTime) = 0;
 	virtual void handleMouseClick(sf::Vector2f mousePosition);
 	virtual void handleTextEntry(sf::Event::TextEvent textEvent);
-	virtual void handleEnterPressed();
 
 protected:
 	static sf::Sprite background;

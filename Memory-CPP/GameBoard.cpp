@@ -4,7 +4,6 @@
 
 GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
-	resolveDelayTime(sf::seconds(0.7f)),
 	resolveTimeout(new SetTimeout()),
 	currentPlayer(0)
 {
@@ -42,12 +41,6 @@ void GameBoard::handleMouseClick(sf::Vector2f mousePosition)
 	{
 		handleCardClick(clickedCard);
 	}
-}
-
-// TODO remove for release
-void GameBoard::handleEnterPressed()
-{
-	finishGame();
 }
 
 std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
@@ -91,16 +84,6 @@ void GameBoard::callNextPlayer()
 	{
 		currentPlayer = 0;
 	}
-	// auto currentPlayerIt = std::find(players.begin(), players.end(), currentPlayer);
-	// auto nextPlayarIt = ++currentPlayerIt;
-	// if (nextPlayarIt != players.end())
-	// {
-	// 	currentPlayer = *nextPlayarIt;
-	// }
-	// else
-	// {
-	// 	currentPlayer = players[0];
-	// }
 }
 
 void GameBoard::renderDeck(sf::RenderWindow &window)
@@ -160,15 +143,12 @@ void GameBoard::handleCardClick(Card * clickedCard)
 		if (revealedCards[0]->getSuit() == revealedCards[1]->getSuit())			// check if the two card are a pair
 		{
 			auto callback = std::bind(&GameBoard::resolvePair, this, true);
-			sf::Time resolveDelayTime = sf::seconds(0.5);
-			resolveTimeout->startTimeout(resolveDelayTime, callback);
-
+			resolveTimeout->startTimeout(sf::seconds(0.5), callback);
 		}
 		else
 		{
 			auto callback = std::bind(&GameBoard::resolvePair, this, false);
-			sf::Time resolveDelayTime = sf::seconds(1);
-			resolveTimeout->startTimeout(resolveDelayTime, callback);
+			resolveTimeout->startTimeout(sf::seconds(1), callback);
 		}
 	}
 }

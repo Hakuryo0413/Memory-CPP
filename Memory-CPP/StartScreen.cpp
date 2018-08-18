@@ -30,35 +30,35 @@ void StartScreen::createGUI()
 	createCounter(& boardSize.y, "Playing board height: ", {50.f, 450.f});
 	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this, std::placeholders::_1), {500.f, 300.f});
 	createLabel("Players: ", { 500.f, 450.f });
-	//createButton("StartGame", std::bind(&StartScreen::startGame, this), { 50.f, 600.f });
+	createButton("StartGame", std::bind(&StartScreen::validateSettings, this), { 50.f, 600.f });
 }
 
 void StartScreen::createLabel(std::string labelText, sf::Vector2f labelPosition)
 {
 	GUIComponent * label = new Label(labelText);
 	label->setPosition(labelPosition);
-	widgets.push_back(label);
+	GUIComponents.push_back(label);
 }
 
-void StartScreen::createButton(std::string buttonText, std::function<void()> callback, sf::Vector2f buttonPosition)
+void StartScreen::createButton(std::string btnText, std::function<void()> callback, sf::Vector2f buttonPosition)
 {
-	GUIComponent * button = new Button(buttonText, callback);
+	GUIComponent * button = new Button(btnText, callback);
 	button->setPosition(buttonPosition);
-	widgets.push_back(button);
+	GUIComponents.push_back(button);
 }
 
 void StartScreen::createCounter(unsigned * value, std::string labelText, sf::Vector2f widgetPosition)
 {
 	GUIComponent * counter = new Counter(value, labelText);
 	counter->setPosition(widgetPosition);
-	widgets.push_back(counter);
+	GUIComponents.push_back(counter);
 }
 
 void StartScreen::createAddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback, sf::Vector2f widgetPosition)
 {
 	GUIComponent * addTextItem = new AddTextItem(labelText, addItemCallback);
 	addTextItem->setPosition(widgetPosition);
-	widgets.push_back(addTextItem);
+	GUIComponents.push_back(addTextItem);
 	textInputs.push_back(addTextItem);
 }
 
@@ -71,6 +71,7 @@ void StartScreen::renderScreen(sf::RenderWindow &window)
 
 void StartScreen::updateScreen(sf::Time deltaTime)
 {
+	errorMessageTimeout->update(deltaTime);
 }
 
 void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
@@ -79,9 +80,9 @@ void StartScreen::handleMouseClick(sf::Vector2f mousePosition)
 	{
 		return;
 	}
-	for(size_t i = 0; i < widgets.size(); i++)
+	for(size_t i = 0; i < GUIComponents.size(); i++)
 	{
-		widgets[i]->handleMouseClick(mousePosition);
+		GUIComponents[i]->handleMouseClick(mousePosition);
 	}
 }
 
@@ -93,18 +94,11 @@ void StartScreen::handleTextEntry(sf::Event::TextEvent textEvent)
 	}
 }
 
-void StartScreen::handleEnterPressed()
-{
-	stateManager->setPlayers(players);
-	stateManager->setBoardSize(boardSize);
-	stateManager->switchScreen(StateManager::Screen::Gameboard);
-}
-
 void StartScreen::renderWidgets(sf::RenderWindow &window)
 {
-	for (size_t i = 0; i < widgets.size(); i++)
+	for (size_t i = 0; i < GUIComponents.size(); i++)
 	{
-		window.draw(*widgets[i]);
+		window.draw(*GUIComponents[i]);
 	}
 }
 
@@ -118,7 +112,7 @@ void StartScreen::renderPlayerList(sf::RenderWindow &window)
 
 void StartScreen::removeErrorMessage()
 {
-	widgets.pop_back();
+	GUIComponents.pop_back();
 }
 
 void StartScreen::createNewPlayer(std::string newPlayerName)
@@ -134,13 +128,27 @@ void StartScreen::createNewPlayer(std::string newPlayerName)
 	players.push_back(newPlayer);
 }
 
+void StartScreen::validateSettings()
+{
+	if (players.size() == 0)
+	{
+		createLabel("Add at least one player!", { 50.f, 700.f });
+		errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
+	}
+	else if (boardSize.x * boardSize.y % 2)
+	{
+		createLabel("A Memory Game has to have an even number of cards!", { 50.f, 700.f });
+		errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
+	}
+	//else
+	//{
+	//	startGame();
+
+	//}
+}
+
 void StartScreen::startGame()
 {
-	if (players.size() < 1)
-	{
-		//createLabel("Add at least one player!", { 50.f, 700.f });
-		//errorMessageTimeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
-	}
 	stateManager->setPlayers(players);
 	stateManager->setBoardSize(boardSize);
 	stateManager->switchScreen(StateManager::Screen::Gameboard);

@@ -18,9 +18,6 @@ public:
 	void renderScreen(sf::RenderWindow &window);
 	void updateScreen(sf::Time deltaTime);
 	void handleMouseClick(sf::Vector2f mousePosition);
-
-	// TODO remove for release
-	void handleEnterPressed();
 private:
 	std::vector<Card*> deck;
 	std::vector<Card*> revealedCards;
@@ -41,5 +38,4 @@ private:
 	void finishGame();
 
 	SetTimeout * resolveTimeout;
-	sf::Time resolveDelayTime;
 };

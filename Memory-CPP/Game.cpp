@@ -41,15 +41,13 @@ void Game::processInput()
 				handleMouseClick(mousePosition);
 			}
 			break;
-		case sf::Event::KeyPressed:
-			if (event.key.code == sf::Keyboard::Enter)
-			{
-				handleEnterPressed();
-			}
-			break;
 		case sf::Event::TextEntered:
 			handleTextEntry(event.text);
 			break;
+		//case sf::Event::Resized:
+		//	sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+		//	window.setView(sf::View(visibleArea));
+		//	break;
 		case sf::Event::Closed:
 			window.close();
 			break;
@@ -85,9 +83,3 @@ void Game::handleTextEntry(sf::Event::TextEvent textEvent)
 {
 	stateManager->currentScreen->handleTextEntry(textEvent);
 }
-
-void Game::handleEnterPressed()
-{
-	stateManager->currentScreen->handleEnterPressed();
-}
-

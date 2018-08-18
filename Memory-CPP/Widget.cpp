@@ -25,7 +25,6 @@ void Widget::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 bool Widget::isClicked(sf::Vector2f mousePosition)
 {
-	sf::Transform parentTransform = getTransform();
 	for (size_t i = 0; i < components.size(); i++)
 	{
 		if (components[i]->isSelectable())
@@ -39,9 +38,9 @@ void Widget::handleMouseClick(sf::Vector2f mousePosition)
 {
 	for (size_t i = 0; i < components.size(); i++)
 	{
-		if (components[i]->isSelectable() && components[i]->isClicked(mousePosition, getTransform()))
+		if (components[i]->isSelectable())
 		{
-			components[i]->handleMouseClick(mousePosition);
+			components[i]->handleMouseClick(mousePosition, getTransform());
 		}
 	}
 }
