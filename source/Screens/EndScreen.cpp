@@ -5,7 +5,7 @@ EndScreen::EndScreen(StateManager * stateManager) :
 	players(stateManager->gameSettings->players),
 	playAgainButton(new Button("Play again", std::bind(&EndScreen::restartGame, this)))
 {
-	playAgainButton->setPosition({400.f, 600.f});
+	playAgainButton->setPosition({ 400.f, 600.f });
 	displayPlayerScores();
 }
 
@@ -60,7 +60,7 @@ void EndScreen::setWinner()
 	{
 		players[i]->playerTag.setCharacterSize(48);
 		players[i]->playerScore.setCharacterSize(48);
-		if (i+1 < players.size() && players[i]->score > players[i+1]->score)
+		if (i + 1 < players.size() && players[i]->score > players[i + 1]->score)
 		{
 			break;
 		}

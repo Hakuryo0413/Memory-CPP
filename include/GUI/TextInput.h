@@ -19,7 +19,7 @@ public:
 	void resetInput();
 	void setEnterCallback(std::function<void()> callback);
 private:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
 	void toggleSelected(bool direction);
 	static sf::Font & inputFont;

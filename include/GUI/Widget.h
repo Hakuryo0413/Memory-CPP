@@ -5,7 +5,7 @@ class Widget : public GUIComponent
 {
 public:
 	Widget();
-	~Widget();
+	virtual ~Widget();
 
 	virtual bool isSelectable();
 	virtual void update(sf::Time deltaTime);

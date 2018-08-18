@@ -8,7 +8,7 @@
 class Button : public GUIComponent
 {
 public:
-    Button(std::string btnText, std::function<void()> callback);
+	Button(std::string btnText, std::function<void()> callback);
 	~Button();
 
 	virtual bool isSelectable();
