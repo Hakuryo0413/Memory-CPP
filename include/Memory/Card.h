@@ -14,7 +14,7 @@ public:
 	Card(unsigned id, Suit suit);
 	~Card();
 
-	void renderCard(sf::RenderWindow &window);
+	void renderCard(sf::RenderWindow & window);
 	void updateCard(sf::Time deltaTime);
 	void setPosition(sf::Vector2u deckPosition);
 	bool isCardClicked(sf::Vector2f mousePosition);
