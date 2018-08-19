@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FadeAnimation.h"
 
 FadeAnimation::FadeAnimation() :
@@ -26,6 +25,6 @@ void FadeAnimation::applyTransformation()
 {
 	sf::Uint8 startAlpha = 0;
 	sf::Uint8 endAlpha = 255;
-	sf::Uint8 alpha = startAlpha + float(endAlpha - startAlpha) * elapsedTime / animationDuration;
+	sf::Uint8 alpha = startAlpha + (endAlpha - startAlpha) * sf::Uint8(elapsedTime / animationDuration);
 	animated->setFillColor(sf::Color(255, 255, 255, alpha));
 };
