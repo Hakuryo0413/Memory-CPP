@@ -12,6 +12,7 @@ public:
 	virtual void startAnimation();
 	virtual void stopAnimation();
 	virtual void updateAnimated(sf::Time deltaTime);
+	virtual bool isPlaying();
 protected:
 	bool playing;
 	static const double pi;

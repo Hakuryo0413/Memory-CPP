@@ -40,6 +40,10 @@ void Card::setPosition(sf::Vector2u deckPosition)
 
 bool Card::isCardClicked(sf::Vector2f mousePosition)
 {
+	if (cardAnimation->isPlaying())
+	{
+		return false;
+	}
 	return cardSprite.getGlobalBounds().contains(mousePosition);
 }
 

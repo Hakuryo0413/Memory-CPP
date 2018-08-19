@@ -1,3 +1,4 @@
+#include "Animation.h"
 
 
 template <typename Animated>
@@ -55,4 +56,10 @@ void Animation<Animated>::updateAnimated(sf::Time deltaTime)
 	}
 
 	applyTransformation();
+}
+
+template<typename Animated>
+inline bool Animation<Animated>::isPlaying()
+{
+	return playing;
 }
