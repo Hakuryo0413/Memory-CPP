@@ -1,12 +1,19 @@
 #include "GameBoard.h"
+#include "Settings.h"
 
 GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
 	resolveTimeout(new SetTimeout()),
-	currentPlayer(0)
+	currentPlayer(0),
+	playingFieldBackground(sf::Vector2f(WIDTH, HEIGHT)),
+	playingField(sf::FloatRect(0, 0, WIDTH, HEIGHT)),
+	playersHUD(sf::FloatRect(0, 0, WIDTH, HEIGHT))
 {
+	playingField.setViewport(sf::FloatRect(0.05f, 0.06f, 0.9f, 0.88f));
+	playingFieldBackground.setFillColor(sf::Color(255, 255, 255, 50));
 	deck = createDeck(stateManager->gameSettings->boardSize);
 	players = stateManager->getPlayers();
+	positionPlayers();
 }
 
 GameBoard::~GameBoard()
@@ -19,11 +26,18 @@ GameBoard::~GameBoard()
 	deck.clear();
 }
 
+std::vector<sf::Vector2f> GameBoard::playerPositions = { { 512.f, 733.f },{ 999.f, 384.f },{ 512.f, 25.f },{ 25.f, 384.f } };
+std::vector<float> GameBoard::playerRotations = {0.f, 270.f, 0.f, 90.f };
+
 void GameBoard::renderScreen(sf::RenderWindow &window)
 {
+	playersHUD = window.getDefaultView();
+	window.setView(playersHUD);
 	GameScreen::renderScreen(window);
-	renderDeck(window);
 	renderPlayers(window);
+	window.setView(playingField);
+	renderPlayingField(window);
+	renderDeck(window);
 }
 
 void GameBoard::updateScreen(sf::Time deltaTime)
@@ -78,6 +92,25 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 	return deck;
 }
 
+void GameBoard::positionPlayers()
+{
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		if (i < 4)
+		{
+			float playerWidth = players[i]->playerTag.getLocalBounds().width;
+			int playerHeight = players[i]->playerTag.getCharacterSize();
+			players[i]->playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
+			players[i]->playerTag.setPosition(playerPositions[i]);
+			players[i]->playerTag.setRotation(playerRotations[i]);
+		}
+		else
+		{
+			players[i]->playerTag.setFillColor(sf::Color::Transparent);
+		}
+	}
+}
+
 void GameBoard::callNextPlayer()
 {
 	if (currentPlayer + 1 < players.size())
@@ -88,6 +121,11 @@ void GameBoard::callNextPlayer()
 	{
 		currentPlayer = 0;
 	}
+}
+
+void GameBoard::renderPlayingField(sf::RenderWindow & window)
+{
+	window.draw(playingFieldBackground);
 }
 
 void GameBoard::renderDeck(sf::RenderWindow &window)

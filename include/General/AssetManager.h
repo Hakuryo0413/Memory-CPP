@@ -4,10 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#define GRAPHICS_PATH "../data/graphics/"
-#define FONTS_PATH "../data/fonts/"
-#define AUDIO_PATH "../data/audio/"
-
 class AssetManager
 {
 public:

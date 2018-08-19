@@ -14,7 +14,7 @@ GameScreen::~GameScreen()
 {
 }
 
-sf::Sprite GameScreen::background(AssetManager::getInstance()->getTexture("Background.png"));
+sf::Sprite GameScreen::background(AssetManager::getInstance()->getTexture("Background(1024x768).png"));
 
 void GameScreen::renderScreen(sf::RenderWindow & window)
 {

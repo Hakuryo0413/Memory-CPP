@@ -167,6 +167,9 @@
     <ClInclude Include="..\include\Screens\StartScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Memory\Settings.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Animations\Animation.inl">

@@ -1,10 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "StartScreen.h"
-
-#define WIDTH 1024
-#define HEIGHT 768
-#define FRAMERATE 60
+#include "Settings.h"
 
 class StateManager;
 

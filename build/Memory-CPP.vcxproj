@@ -169,6 +169,7 @@
     <ClInclude Include="..\include\Memory\Card.h" />
     <ClInclude Include="..\include\Memory\Game.h" />
     <ClInclude Include="..\include\Memory\Player.h" />
+    <ClInclude Include="..\include\Memory\Settings.h" />
     <ClInclude Include="..\include\Screens\EndScreen.h" />
     <ClInclude Include="..\include\Screens\GameBoard.h" />
     <ClInclude Include="..\include\Screens\GameScreen.h" />

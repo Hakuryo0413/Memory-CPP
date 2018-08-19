@@ -26,8 +26,12 @@ private:
 
 	std::vector<Player *> players;
 	unsigned currentPlayer;
+	static std::vector<sf::Vector2f> playerPositions;
+	static std::vector<float> playerRotations;
+	void positionPlayers();
 	void callNextPlayer();
 
+	void renderPlayingField(sf::RenderWindow & window);
 	void renderDeck(sf::RenderWindow & window);
 	void updateDeck(sf::Time deltaTime);
 	void renderPlayers(sf::RenderWindow & window);
@@ -38,4 +42,7 @@ private:
 	void finishGame();
 
 	SetTimeout * resolveTimeout;
+	sf::RectangleShape playingFieldBackground;
+	sf::View playingField;
+	sf::View playersHUD;
 };
