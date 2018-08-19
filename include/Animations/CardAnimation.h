@@ -9,9 +9,9 @@ public:
 	CardAnimation(sf::Sprite * animated, sf::Time animationDuration, sf::Texture * cardTexture);
 	~CardAnimation();
 
-	void stopAnimation();
+	virtual void stopAnimation();
 private:
-	virtual void applyTransformation();
+	void applyTransformation();
 	bool isFlipped;
 	void toggleTexture();
 	const sf::Texture * cardTexture;

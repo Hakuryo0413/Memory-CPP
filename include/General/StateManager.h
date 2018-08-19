@@ -30,14 +30,6 @@ public:
 		GameSettings() {};
 		GameSettings(std::vector<Player *> players) : players(players) {};
 		GameSettings(std::vector<Player *> players, sf::Vector2u boardSize) : players(players), boardSize(boardSize) {};
-		~GameSettings()
-		{
-			for (size_t i = 0; i < players.size(); i++)
-			{
-				delete players[i];
-			}
-			players.clear();
-		}
 		std::vector<Player *> players;
 		sf::Vector2u boardSize;
 	};

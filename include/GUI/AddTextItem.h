@@ -7,16 +7,16 @@
 class AddTextItem : public Widget
 {
 public:
-	AddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback);
-	~AddTextItem();
+  AddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback);
+  ~AddTextItem();
 
-	void setLabel(std::string text);
-	void handleTextEntry(sf::Event::TextEvent textEvent);
+  void setLabel(std::string text);
+  void handleTextEntry(sf::Event::TextEvent textEvent);
 private:
-	void submitNewItem();
-	std::function<void(std::string)> addItemCallback;
+  void submitNewItem();
+  std::function<void(std::string)> addItemCallback;
 
-	Button * addButton;
-	Label * label;
-	TextInput * textInput;
+  Button * addButton;
+  Label * label;
+  TextInput * textInput;
 };

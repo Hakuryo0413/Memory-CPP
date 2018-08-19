@@ -12,8 +12,6 @@ Player::Player(std::string name) :
 
 Player::~Player()
 {
-	delete nameAnimation;
-	delete scoreAnimation;
 }
 
 sf::Font & Player::playerFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");

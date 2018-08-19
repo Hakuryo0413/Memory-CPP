@@ -45,12 +45,12 @@ void StateManager::switchScreen(Screen newScreen)
 	}
 }
 
-std::vector<Player *> StateManager::getPlayers()
+std::vector<Player*> StateManager::getPlayers()
 {
 	return gameSettings->players;
 }
 
-void StateManager::setPlayers(std::vector<Player *> players)
+void StateManager::setPlayers(std::vector<Player*> players)
 {
 	gameSettings->players = players;
 }
