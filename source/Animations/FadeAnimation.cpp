@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "FadeAnimation.h"
 
 FadeAnimation::FadeAnimation() :

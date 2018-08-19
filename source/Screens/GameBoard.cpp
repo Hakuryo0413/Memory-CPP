@@ -9,7 +9,6 @@ GameBoard::GameBoard(StateManager * stateManager) :
 	players = stateManager->getPlayers();
 }
 
-
 GameBoard::~GameBoard()
 {
 	delete resolveTimeout;

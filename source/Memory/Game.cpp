@@ -7,7 +7,6 @@ Game::Game() :
 	window.setFramerateLimit(FRAMERATE);
 }
 
-
 Game::~Game()
 {
 	delete stateManager;

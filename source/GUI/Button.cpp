@@ -61,7 +61,7 @@ void Button::handleMouseClick(sf::Vector2f mousePosition)
 	{
 		callback();
 		toggleActive();
-		timeout->startTimeout(sf::seconds(0.3), std::bind(&Button::toggleActive, this));
+		timeout->startTimeout(sf::seconds(0.3f), std::bind(&Button::toggleActive, this));
 	}
 }
 
@@ -71,7 +71,7 @@ void Button::handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & 
 	{
 		callback();
 		toggleActive();
-		timeout->startTimeout(sf::seconds(0.3), std::bind(&Button::toggleActive, this));
+		timeout->startTimeout(sf::seconds(0.3f), std::bind(&Button::toggleActive, this));
 	}
 }
 

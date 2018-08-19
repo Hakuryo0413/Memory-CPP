@@ -43,6 +43,10 @@ bool Widget::isClicked(sf::Vector2f mousePosition)
 		{
 			return components[i]->isClicked(mousePosition, getTransform());
 		}
+		else
+		{
+			return false;
+		}
 	}
 }
 
