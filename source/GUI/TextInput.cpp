@@ -2,10 +2,10 @@
 
 TextInput::TextInput() :
 	shape(sf::Vector2f(125.f, 40.f)),
-	playerText("", inputFont)
+	playerText("", GUIFont)
 {
-	playerText.setFillColor({ 0, 0, 0, 255 });
 	playerText.setPosition(5.f, 0);
+	shape.setFillColor(backgroundColor);
 	shape.setOutlineThickness(2.f);
 	shape.setOutlineColor(outlineColor);
 }
@@ -13,10 +13,6 @@ TextInput::TextInput() :
 TextInput::~TextInput()
 {
 }
-
-sf::Font & TextInput::inputFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
-sf::Color TextInput::outlineColor(168, 118, 62, 255);
-sf::Color TextInput::selectedOutlineColor(111, 26, 7, 255);
 
 bool TextInput::isSelectable()
 {
@@ -121,7 +117,7 @@ void TextInput::toggleSelected(bool direction)
 	if (direction)
 	{
 		selected = true;
-		shape.setOutlineColor(selectedOutlineColor);
+		shape.setOutlineColor(activeOutlineColor);
 	}
 	else
 	{

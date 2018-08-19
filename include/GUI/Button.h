@@ -22,9 +22,6 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::function<void()> callback;
 
-	static sf::Texture & buttonTexture;
-	static sf::Font & buttonFont;
-
 	sf::RectangleShape shape;
 	sf::Text text;
 

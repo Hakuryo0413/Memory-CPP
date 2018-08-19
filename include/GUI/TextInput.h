@@ -22,9 +22,6 @@ private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
 	void toggleSelected(bool direction);
-	static sf::Font & inputFont;
-	static sf::Color outlineColor;
-	static sf::Color selectedOutlineColor;
 	sf::RectangleShape shape;
 	sf::Text playerText;
 	std::string playerInput;

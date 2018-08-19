@@ -3,15 +3,13 @@
 
 Label::Label(std::string text) :
 	GUIComponent(),
-	labelText(text, labelFont)
+	labelText(text, GUIFont)
 {
 }
 
 Label::~Label()
 {
 }
-
-sf::Font & Label::labelFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
 
 bool Label::isSelectable()
 {

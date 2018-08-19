@@ -8,6 +8,11 @@ GUIComponent::~GUIComponent()
 {
 }
 
+sf::Font & GUIComponent::GUIFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
+sf::Color GUIComponent::backgroundColor(0, 0, 0, 32);
+sf::Color GUIComponent::outlineColor(255, 255, 255, 128);
+sf::Color GUIComponent::activeOutlineColor(255, 255, 255, 226);
+
 bool GUIComponent::isSelectable()
 {
 	return false;

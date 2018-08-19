@@ -16,4 +16,9 @@ public:
 	virtual void handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & parentTransform);
 	virtual void handleTextEntry(sf::Event::TextEvent textEntry);
 	virtual sf::Vector2f getSize();
+protected:
+	static sf::Font & GUIFont;
+	static sf::Color backgroundColor;
+	static sf::Color outlineColor;
+	static sf::Color activeOutlineColor;
 };
