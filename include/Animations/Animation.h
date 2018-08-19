@@ -9,9 +9,9 @@ public:
 	Animation(Animated * animated, sf::Time animationDuration);
 	~Animation();
 
-	void startAnimation();
-	void stopAnimation();
-	void updateAnimated(sf::Time deltaTime);
+	virtual void startAnimation();
+	virtual void stopAnimation();
+	virtual void updateAnimated(sf::Time deltaTime);
 protected:
 	bool playing;
 	static const double pi;
