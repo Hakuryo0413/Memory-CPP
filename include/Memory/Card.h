@@ -20,6 +20,7 @@ public:
 	bool isCardClicked(sf::Vector2f mousePosition);
 	void flipCard();
 	Suit getSuit();
+	static sf::Vector2u getSize();
 
 private:
 	unsigned id;

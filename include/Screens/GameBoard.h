@@ -42,6 +42,9 @@ private:
 	void finishGame();
 
 	SetTimeout * resolveTimeout;
+
+	sf::Vector2f calculateDeckSize();
+	sf::Vector2f calculatePlayingFieldScale();
 	sf::RectangleShape playingFieldBackground;
 	sf::View playingField;
 	sf::View playersHUD;

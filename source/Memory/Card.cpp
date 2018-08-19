@@ -33,8 +33,8 @@ void Card::setPosition(sf::Vector2u deckPosition)
 {
 	cardSprite.setOrigin(float(size.x / 2), float(size.y / 2)); // set origin to center of card
 	sf::Vector2f position;
-	position.x = deckPosition.x * size.x + 10.0f * deckPosition.x + size.x / 2;  // position of card + origin offset + margin
-	position.y = deckPosition.y * size.y + 10.0f * deckPosition.y + size.y / 2;
+	position.x = deckPosition.x * size.x + 10.f * deckPosition.x + size.x / 2;  // position of card + origin offset + margin
+	position.y = deckPosition.y * size.y + 10.f * deckPosition.y + size.y / 2;
 	cardSprite.setPosition(position);
 }
 
@@ -55,6 +55,11 @@ void Card::flipCard()
 Card::Suit Card::getSuit()
 {
 	return cardSuit;
+}
+
+sf::Vector2u Card::getSize()
+{
+	return size;
 }
 
 void Card::setCardTexture(Suit suit)

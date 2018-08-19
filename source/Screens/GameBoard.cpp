@@ -5,11 +5,14 @@ GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
 	resolveTimeout(new SetTimeout()),
 	currentPlayer(0),
-	playingFieldBackground(sf::Vector2f(WIDTH, HEIGHT)),
-	playingField(sf::FloatRect(0, 0, WIDTH, HEIGHT)),
+	playingFieldBackground(),
+	playingField(),
 	playersHUD(sf::FloatRect(0, 0, WIDTH, HEIGHT))
 {
-	playingField.setViewport(sf::FloatRect(0.05f, 0.06f, 0.9f, 0.88f));
+	playingFieldBackground.setSize(calculatePlayingFieldScale());
+	playingField.setSize(calculatePlayingFieldScale());
+	playingField.setCenter(calculateDeckSize() / 2.f);
+	playingField.setViewport(sf::FloatRect(0.05f, 0.05f, 0.9f, 0.9f));
 	playingFieldBackground.setFillColor(sf::Color(255, 255, 255, 50));
 	deck = createDeck(stateManager->gameSettings->boardSize);
 	players = stateManager->getPlayers();
@@ -63,15 +66,28 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 {
 	std::vector<Card *> deck;
 	unsigned deckSize = boardSize.x * boardSize.y;
-	unsigned cardsPerSuit = deckSize / Card::Suit::COUNT;
+	unsigned pairsPerSuit = deckSize / 2 / Card::Suit::COUNT;
 	unsigned cardIndex = 0;
 
 	for (unsigned i = 0; i < Card::Suit::COUNT; i++) {
-		for (unsigned j = 0; j < cardsPerSuit; j++)
+		for (unsigned j = 0; j < pairsPerSuit * 2; j++)
 		{
 			Card * card = new Card(cardIndex, static_cast<Card::Suit>(i));
 			deck.push_back(card);
 			cardIndex++;
+		}
+	}
+
+	if ((deckSize / 2) % Card::Suit::COUNT)
+	{
+		for (size_t i = 0; i < (deckSize / 2) % Card::Suit::COUNT; i++)
+		{
+			for (size_t j = 0; j < 2; j++)
+			{
+				Card * card = new Card(cardIndex, static_cast<Card::Suit>(i));
+				deck.push_back(card);
+				cardIndex++;
+			}
 		}
 	}
 
@@ -224,5 +240,31 @@ void GameBoard::finishGame()
 {
 	stateManager->switchScreen(StateManager::Screen::EndScreen);
 }
+
+sf::Vector2f GameBoard::calculateDeckSize()
+{
+	sf::Vector2f deckSize;
+	deckSize.x = stateManager->gameSettings->boardSize.x * (Card::getSize().x + 10.f);
+	deckSize.y = stateManager->gameSettings->boardSize.y * (Card::getSize().y + 10.f);
+	return deckSize;
+}
+
+sf::Vector2f GameBoard::calculatePlayingFieldScale()
+{
+	sf::Vector2f playingFieldSize(WIDTH * 0.9f, HEIGHT * 0.9f);
+	sf::Vector2f deckSize = calculateDeckSize();
+	if (deckSize.x > playingFieldSize.x)
+	{
+		playingFieldSize.x = deckSize.x;
+		playingFieldSize.y = playingFieldSize.x;
+	}
+	if (deckSize.y > playingFieldSize.y)
+	{
+		playingFieldSize.y = deckSize.y;
+		playingFieldSize.x = playingFieldSize.y;
+	}
+	return playingFieldSize;
+}
+
 
 

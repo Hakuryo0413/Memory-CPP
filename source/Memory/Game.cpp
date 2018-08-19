@@ -15,9 +15,9 @@ Game::~Game()
 void Game::run()
 {
 	sf::Clock clock;
-	stateManager->gameSettings->boardSize = { 4, 4 };
-	stateManager->switchScreen(StateManager::Screen::Gameboard);
-	//stateManager->switchScreen(StateManager::Screen::StartScreen);
+	//stateManager->gameSettings->boardSize = { 4, 4 };
+	//stateManager->switchScreen(StateManager::Screen::Gameboard);
+	stateManager->switchScreen(StateManager::Screen::StartScreen);
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
