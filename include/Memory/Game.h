@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "StartScreen.h"
 #include "Settings.h"
+#include "MusicPlayer.h"
+#include "StartScreen.h"
 
 class StateManager;
 
@@ -25,5 +26,6 @@ private:
 	void handleTextEntry(sf::Event::TextEvent textEvent);
 
 	StateManager * stateManager;
+	MusicPlayer musicPlayer;
 };
 

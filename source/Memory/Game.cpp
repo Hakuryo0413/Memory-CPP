@@ -2,7 +2,8 @@
 
 Game::Game() :
 	window(sf::VideoMode(WIDTH, HEIGHT), "Memory"),
-	stateManager(new StateManager())
+	stateManager(new StateManager()),
+	musicPlayer()
 {
 	window.setFramerateLimit(FRAMERATE);
 }
@@ -15,6 +16,7 @@ Game::~Game()
 void Game::run()
 {
 	sf::Clock clock;
+	musicPlayer.playMusic();
 	//stateManager->gameSettings->boardSize = { 4, 4 };
 	//stateManager->switchScreen(StateManager::Screen::Gameboard);
 	stateManager->switchScreen(StateManager::Screen::StartScreen);
