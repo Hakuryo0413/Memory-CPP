@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="..\source\Animations\CardAnimation.cpp" />
     <ClCompile Include="..\source\Animations\FadeAnimation.cpp" />
+    <ClCompile Include="..\source\Animations\PulseAnimation.cpp" />
     <ClCompile Include="..\source\Animations\SetTimeout.cpp" />
     <ClCompile Include="..\source\Animations\TableRotation.cpp" />
     <ClCompile Include="..\source\General\AssetManager.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\include\Animations\Animation.h" />
     <ClInclude Include="..\include\Animations\CardAnimation.h" />
     <ClInclude Include="..\include\Animations\FadeAnimation.h" />
+    <ClInclude Include="..\include\Animations\PulseAnimation.h" />
     <ClInclude Include="..\include\Animations\SetTimeout.h" />
     <ClInclude Include="..\include\Animations\TableRotation.h" />
     <ClInclude Include="..\include\General\AssetManager.h" />

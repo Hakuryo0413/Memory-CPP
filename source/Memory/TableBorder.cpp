@@ -4,9 +4,11 @@
 TableBorder::TableBorder(std::vector<Player *> players) :
 	players(players),
 	currentPlayer(0),
-	tableBorderView(new sf::View(sf::FloatRect(0, 0, WIDTH, HEIGHT)))
+	tableBorderView(new sf::View(sf::FloatRect(0, 0, WIDTH, HEIGHT))),
+	rotationTime(sf::seconds(0.5f))
 {
-	tableRotation = new TableRotation(tableBorderView, sf::seconds(0.5f));
+	tableRotation = new TableRotation(tableBorderView, rotationTime);
+	rotationTimeout = new SetTimeout();
 	createBackground();
 	positionPlayers();
 }
@@ -29,45 +31,21 @@ void TableBorder::renderTableBorder(sf::RenderWindow &window)
 
 void TableBorder::updateTableBorder(sf::Time deltaTime)
 {
+	rotationTimeout->update(deltaTime);
 	tableRotation->updateAnimated(deltaTime);
+	for (size_t i = 0; i < players.size(); i++)
+	{
+		players[i]->updatePlayer(deltaTime, Player::PlayerComponents::Name);
+	}
 }
 
 void TableBorder::callNextPlayer()
 {
-	if (players.size() == 2 || (players.size() == 3 && currentPlayer == 2))
+	if (players.size() > 1)
 	{
-		tableRotation->startAnimation(180.f);
+		rotateBoard();
 	}
-	else
-	{
-		tableRotation->startAnimation(90.f);
-	}
-
-
-	if (players.size() > 4)
-	{
-		players[currentPlayer]->playerTag.setFillColor(sf::Color::Transparent);
-		int newPlayer = currentPlayer + 4;
-		if (newPlayer < players.size())
-		{
-			setPlayerLocation(players[newPlayer]->playerTag, newPlayer % 4);
-			players[newPlayer]->playerTag.setFillColor(sf::Color::White);
-		}
-		else
-		{
-			setPlayerLocation(players[newPlayer - players.size()]->playerTag, newPlayer % 4);
-			players[newPlayer - players.size()]->playerTag.setFillColor(sf::Color::White);
-		}
-	}
-
-	if (currentPlayer + 1 < players.size())
-	{
-		currentPlayer++;
-	}
-	else
-	{
-		currentPlayer = 0;
-	}
+	advancePlayer();
 }
 
 void TableBorder::score()
@@ -79,7 +57,7 @@ void TableBorder::positionPlayers()
 {
 	for (int i = 0; i < players.size(); i++)
 	{
-		players[i]->centarTag();
+		players[i]->centarTag(true);
 
 		if (i < 4)
 		{
@@ -138,4 +116,52 @@ void TableBorder::renderPlayers(sf::RenderWindow & window)
 	{
 		players[i]->renderPlayer(window, Player::PlayerComponents::Name);
 	}
+}
+
+void TableBorder::rotateBoard()
+{
+	if (players.size() == 2 || (players.size() == 3 && currentPlayer == 2))
+	{
+		tableRotation->startAnimation(180.f);
+		rotationTimeout->startTimeout(rotationTime, std::bind(&TableBorder::pulseCurrentPlayer, this));
+	}
+	else
+	{
+		tableRotation->startAnimation(90.f);
+		rotationTimeout->startTimeout(rotationTime, std::bind(&TableBorder::pulseCurrentPlayer, this));
+	}
+
+
+	if (players.size() > 4)
+	{
+		players[currentPlayer]->playerTag.setFillColor(sf::Color::Transparent);
+		int newPlayer = currentPlayer + 4;
+		if (newPlayer < players.size())
+		{
+			setPlayerLocation(players[newPlayer]->playerTag, newPlayer % 4);
+			players[newPlayer]->playerTag.setFillColor(sf::Color::White);
+		}
+		else
+		{
+			setPlayerLocation(players[newPlayer - players.size()]->playerTag, newPlayer % 4);
+			players[newPlayer - players.size()]->playerTag.setFillColor(sf::Color::White);
+		}
+	}
+}
+
+void TableBorder::advancePlayer()
+{
+	if (currentPlayer + 1 < players.size())
+	{
+		currentPlayer++;
+	}
+	else
+	{
+		currentPlayer = 0;
+	}
+}
+
+void TableBorder::pulseCurrentPlayer()
+{
+	players[currentPlayer]->pulsePlayer();
 }

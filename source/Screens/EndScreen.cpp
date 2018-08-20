@@ -5,7 +5,7 @@ EndScreen::EndScreen(StateManager * stateManager) :
 	players(stateManager->gameSettings->players),
 	playAgainButton(new Button("Play again", std::bind(&EndScreen::restartGame, this)))
 {
-	playAgainButton->setPosition({ 400.f, 600.f });
+	playAgainButton->setPosition({ 300.f, 600.f });
 	displayPlayerScores();
 }
 
@@ -24,6 +24,7 @@ void EndScreen::renderScreen(sf::RenderWindow & window)
 void EndScreen::updateScreen(sf::Time deltaTime)
 {
 	updatePlayerList(deltaTime);
+	playAgainButton->update(deltaTime);
 }
 
 void EndScreen::handleMouseClick(sf::Vector2f mousePosition)
@@ -73,15 +74,17 @@ void EndScreen::positionTags()
 	float playerListIndent = 50.f;
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		players[i]->playerTag.setFillColor(sf::Color::White);
+		players[i]->centarTag(false);
+		players[i]->playerTag.setRotation(0.f);
+		players[i]->playerTag.setFillColor(sf::Color::Transparent);
 		players[i]->playerTag.setPosition(playerListIndent, playerListHeight);
 		players[i]->playerScore.setPosition(playerListIndent + 200.f, playerListHeight);
 		playerListHeight += players[i]->playerTag.getCharacterSize() + 16.f;
 		if (playerListHeight > 500.f)
 		{
 			playerListHeight = 100.f;
-			playerListIndent += 250.f;
-			if (playerListIndent >1000.f)
+			playerListIndent += 400.f;
+			if (playerListIndent > 700.f)
 			{
 				break;
 			}

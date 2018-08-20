@@ -114,6 +114,9 @@
     <ClCompile Include="..\source\Memory\TableBorder.cpp">
       <Filter>Source Files\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Animations\PulseAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Animations\Animation.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="..\include\General\Settings.h">
       <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Animations\PulseAnimation.h">
+      <Filter>Header Files\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

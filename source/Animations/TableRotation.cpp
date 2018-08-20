@@ -1,5 +1,4 @@
 #include "TableRotation.h"
-#include <iostream>
 
 TableRotation::TableRotation() :
 	Animation(),

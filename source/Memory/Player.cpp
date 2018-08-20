@@ -7,13 +7,15 @@ Player::Player(std::string name) :
 	playerScore("0", playerFont)
 {
 	nameAnimation = new FadeAnimation(&playerTag, animationTime);
-	scoreAnimation = new FadeAnimation(&playerTag, animationTime);
+	scoreAnimation = new FadeAnimation(&playerScore, animationTime);
+	pulseAnimation = new PulseAnimation(&playerTag, animationTime);
 }
 
 Player::~Player()
 {
 	delete nameAnimation;
 	delete scoreAnimation;
+	delete pulseAnimation;
 }
 
 sf::Font & Player::playerFont = AssetManager::getInstance()->getFont("Beleren-Bold.ttf");
@@ -44,6 +46,7 @@ void Player::updatePlayer(sf::Time deltaTime, PlayerComponents component)
 	{
 	case PlayerComponents::Name:
 		nameAnimation->updateAnimated(deltaTime);
+		pulseAnimation->updateAnimated(deltaTime);
 		break;
 	case PlayerComponents::Score:
 		scoreAnimation->updateAnimated(deltaTime);
@@ -51,6 +54,7 @@ void Player::updatePlayer(sf::Time deltaTime, PlayerComponents component)
 	case PlayerComponents::All:
 		nameAnimation->updateAnimated(deltaTime);
 		scoreAnimation->updateAnimated(deltaTime);
+		pulseAnimation->updateAnimated(deltaTime);
 		break;
 	default:
 		break;
@@ -76,11 +80,23 @@ void Player::fadePlayer(bool direction, PlayerComponents component)
 	}
 }
 
-void Player::centarTag()
+void Player::pulsePlayer()
 {
-	float playerWidth = playerTag.getLocalBounds().width;
-	int playerHeight = playerTag.getCharacterSize();
-	playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
+	pulseAnimation->startAnimation();
+}
+
+void Player::centarTag(bool center)
+{
+	if (center)
+	{
+		float playerWidth = playerTag.getLocalBounds().width;
+		int playerHeight = playerTag.getCharacterSize();
+		playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
+	}
+	else
+	{
+		playerTag.setOrigin(0, 0);
+	}
 }
 
 void Player::increaseScore()

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "TableRotation.h"
+#include "SetTimeout.h"
 
 class TableBorder
 {
@@ -28,8 +29,14 @@ private:
 	void renderBackground(sf::RenderWindow & window);
 	void renderPlayers(sf::RenderWindow & window);
 
+	void rotateBoard();
+	void advancePlayer();
+
 	std::vector<Player *> players;
 	int currentPlayer;
 
+	void pulseCurrentPlayer();
+	sf::Time rotationTime;
 	TableRotation * tableRotation;
+	SetTimeout * rotationTimeout;
 };

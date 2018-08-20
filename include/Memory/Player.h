@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
 #include "FadeAnimation.h"
+#include "PulseAnimation.h"
 
 class Player
 {
@@ -20,8 +21,9 @@ public:
 	void renderPlayer(sf::RenderWindow & window, PlayerComponents component);
 	void updatePlayer(sf::Time deltaTime, PlayerComponents component);
 	void fadePlayer(bool direction, PlayerComponents component);		// fade in (true), fade out (false)
+	void pulsePlayer();
 
-	void centarTag();
+	void centarTag(bool center);
 	void increaseScore();
 	sf::Text playerTag;
 	sf::Text playerScore;
@@ -33,5 +35,6 @@ private:
 
 	FadeAnimation * nameAnimation;
 	FadeAnimation * scoreAnimation;
+	PulseAnimation * pulseAnimation;
 };
 

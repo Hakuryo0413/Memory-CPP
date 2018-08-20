@@ -35,6 +35,6 @@ void FadeAnimation::applyTransformation()
 		startAlpha = 255;
 		endAlpha = 0;
 	}
-	sf::Uint8 alpha = (endAlpha - startAlpha) * std::sin(sf::Uint8(elapsedTime / animationDuration) * (pi / 2)) + startAlpha;
+	sf::Uint8 alpha = (endAlpha - startAlpha) * std::sin(elapsedTime / animationDuration * pi / 2) + startAlpha;
 	animated->setFillColor(sf::Color(255, 255, 255, alpha));
 };
