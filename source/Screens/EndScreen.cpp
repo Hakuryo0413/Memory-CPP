@@ -70,11 +70,22 @@ void EndScreen::setWinner()
 void EndScreen::positionTags()
 {
 	float playerListHeight = 100.f;
+	float playerListIndent = 50.f;
 	for (size_t i = 0; i < players.size(); i++)
 	{
-		players[i]->playerTag.setPosition(100.f, playerListHeight);
-		players[i]->playerScore.setPosition(300.f, playerListHeight);
+		players[i]->playerTag.setFillColor(sf::Color::White);
+		players[i]->playerTag.setPosition(playerListIndent, playerListHeight);
+		players[i]->playerScore.setPosition(playerListIndent + 200.f, playerListHeight);
 		playerListHeight += players[i]->playerTag.getCharacterSize() + 16.f;
+		if (playerListHeight > 500.f)
+		{
+			playerListHeight = 100.f;
+			playerListIndent += 250.f;
+			if (playerListIndent >1000.f)
+			{
+				break;
+			}
+		}
 	}
 }
 

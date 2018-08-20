@@ -30,6 +30,7 @@ void GameBoard::renderScreen(sf::RenderWindow &window)
 	window.setView(playingField);
 	renderPlayingField(window);
 	renderDeck(window);
+	window.setView(window.getDefaultView());
 }
 
 void GameBoard::updateScreen(sf::Time deltaTime)
@@ -202,12 +203,10 @@ sf::Vector2f GameBoard::calculatePlayingFieldScale()
 	if (deckSize.x > playingFieldSize.x)
 	{
 		playingFieldSize.x = deckSize.x;
-		playingFieldSize.y = playingFieldSize.x;
 	}
 	if (deckSize.y > playingFieldSize.y)
 	{
 		playingFieldSize.y = deckSize.y;
-		playingFieldSize.x = playingFieldSize.y;
 	}
 	return playingFieldSize;
 }

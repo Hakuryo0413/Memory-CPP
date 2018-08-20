@@ -136,6 +136,12 @@ void StartScreen::createNewPlayer(std::string newPlayerName)
 		playerListHeight = 500.f;
 		playerListIndent += 150.f;
 	}
+	if (playerListIndent > 900)
+	{
+		playerListHeight = 500.f;
+		playerListIndent = 500.f;
+		players.end()[-12]->playerTag.setFillColor(sf::Color::Transparent);
+	}
 	players.push_back(newPlayer);
 }
 

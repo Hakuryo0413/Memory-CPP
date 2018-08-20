@@ -53,7 +53,7 @@ void TableBorder::callNextPlayer()
 		}
 		else
 		{
-			players[currentPlayer - 4 + players.size()]->playerTag.setFillColor(sf::Color::Transparent);
+			players.end()[currentPlayer - 4]->playerTag.setFillColor(sf::Color::Transparent);
 		}
 		setPlayerLocation(players[currentPlayer]->playerTag, currentPlayer);
 	}
@@ -99,8 +99,16 @@ void TableBorder::createBackground()
 {
 	for(size_t i = 0; i < 4; i++)
 	{
-		sf::RectangleShape backgroundShape ({ WIDTH, 50.f });
-		backgroundShape.setOrigin({ WIDTH / 2.f, 25.f });
+		sf::RectangleShape backgroundShape;
+		if (i % 2)
+		{
+			backgroundShape.setSize({ WIDTH, 50.f });
+			backgroundShape.setOrigin({ WIDTH / 2.f, 25.f });
+		}
+		else {
+			backgroundShape.setSize({ HEIGHT, 50.f });
+			backgroundShape.setOrigin({ HEIGHT / 2.f, 25.f });
+		}
 		backgroundShape.setFillColor(sf::Color(0, 0, 0, 32));
 		backgroundShape.setPosition(playerPositions[i]);
 		backgroundShape.setRotation(playerRotations[i]);
