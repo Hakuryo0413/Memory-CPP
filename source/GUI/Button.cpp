@@ -30,7 +30,7 @@ Button::~Button()
 	delete timeout;
 }
 
-sf::Sound buttonSound (AssetManager::getInstance()->getSoundBuffer("ButtonClickSound.ogg"));
+sf::Sound buttonSound (AssetManager::getInstance()->getSoundBuffer("ButtonClickSound.wav"));
 
 bool Button::isSelectable()
 {

@@ -3,7 +3,6 @@
 #include <SFML/Audio.hpp>
 #include "AssetManager.h"
 #include "CardAnimation.h"
-
 class Card
 {
 public:

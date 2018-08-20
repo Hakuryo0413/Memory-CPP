@@ -16,7 +16,7 @@ Card::~Card()
 
 sf::Texture & Card::cardBackTexture = AssetManager::getInstance()->getTexture("CardBack(90x160).png");
 sf::Vector2u Card::size = cardBackTexture.getSize();
-sf::Sound cardSound (AssetManager::getInstance()->getSoundBuffer("CardTurnSound.ogg"));
+sf::Sound cardSound (AssetManager::getInstance()->getSoundBuffer("CardTurnSound.wav"));
 
 sf::Time Card::animationTime = sf::seconds(0.5f);
 
