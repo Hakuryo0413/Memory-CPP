@@ -1,3 +1,4 @@
+#include "Settings.h"
 #include "StartScreen.h"
 #include "Counter.h"
 #include "AddTextItem.h"
@@ -9,7 +10,7 @@ StartScreen::StartScreen(StateManager * stateManager) :
 	boardSize(4, 4),
 	timeout(new SetTimeout),
 	playerListHeight(500.f),
-	playerListIndent(500.f),
+	playerListIndent(WIDTH / 2.f),
 	settingsValidated(false)
 {
 	createGUI();
@@ -26,19 +27,20 @@ StartScreen::~StartScreen()
 
 void StartScreen::createGUI()
 {
-	createLabel("A Game of Memory", { 350.f, 50.f });
-	createLabel("Welcome, Player!", { 360.f, 100.f });
-	createLabel("Please choose the desired board width, and add players!", { 50.f, 200.f });
+	createLabel("A Game of Memory", { WIDTH / 2.f, 50.f }, true);
+	createLabel("Welcome, Player!", { WIDTH / 2.f, 100.f }, true);
+	createLabel("Please choose the desired board width,", { WIDTH / 2.f, 200.f }, true);
+	createLabel("and add players!", { WIDTH / 2.f, 250.f }, true);
 	createCounter(&boardSize.x, "Playing board width: ", { 50.f, 300.f });
 	createCounter(&boardSize.y, "Playing board height: ", { 50.f, 450.f });
-	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this, std::placeholders::_1), { 500.f, 300.f });
-	createLabel("Players: ", { 500.f, 450.f });
+	createAddTextItem("Add Player", std::bind(&StartScreen::createNewPlayer, this, std::placeholders::_1), { WIDTH / 2.f, 300.f });
+	createLabel("Players: ", { WIDTH / 2.f, 450.f });
 	createButton("StartGame", std::bind(&StartScreen::validateSettings, this), { 50.f, 600.f });
 }
 
-void StartScreen::createLabel(std::string labelText, sf::Vector2f labelPosition)
+void StartScreen::createLabel(std::string labelText, sf::Vector2f labelPosition, bool center)
 {
-	GUIComponent * label = new Label(labelText);
+	GUIComponent * label = new Label(labelText, center);
 	label->setPosition(labelPosition);
 	GUIComponents.push_back(label);
 }
@@ -136,11 +138,14 @@ void StartScreen::createNewPlayer(std::string newPlayerName)
 		playerListHeight = 500.f;
 		playerListIndent += 150.f;
 	}
-	if (playerListIndent > 900)
+	if (playerListIndent > 600.f)
 	{
 		playerListHeight = 500.f;
-		playerListIndent = 500.f;
-		players.end()[-14]->playerTag.setFillColor(sf::Color::Transparent);
+		playerListIndent = WIDTH / 2.f;
+	}
+	if (players.size() >= 10)
+	{
+		players.end()[-10]->playerTag.setFillColor(sf::Color::Transparent);
 	}
 	players.push_back(newPlayer);
 }

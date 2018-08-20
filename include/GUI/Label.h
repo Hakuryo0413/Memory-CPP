@@ -4,7 +4,7 @@
 class Label : public GUIComponent
 {
 public:
-	Label(std::string text);
+	Label(std::string text, bool center = false);
 	~Label();
 
 	virtual bool isSelectable();

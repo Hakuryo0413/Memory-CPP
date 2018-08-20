@@ -1,10 +1,14 @@
 #include "Label.h"
 #include "AssetManager.h"
 
-Label::Label(std::string text) :
+Label::Label(std::string text, bool center) :
 	GUIComponent(),
 	labelText(text, GUIFont)
 {
+	if (center)
+	{
+		labelText.setOrigin({ labelText.getLocalBounds().width / 2.f, labelText.getCharacterSize() / 2.f });
+	}
 }
 
 Label::~Label()

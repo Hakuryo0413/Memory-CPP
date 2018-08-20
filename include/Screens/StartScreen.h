@@ -21,7 +21,7 @@ public:
 	virtual void handleTextEntry(sf::Event::TextEvent textEvent);
 private:
 	void createGUI();
-	void createLabel(std::string labelText, sf::Vector2f labelPosition);
+	void createLabel(std::string labelText, sf::Vector2f labelPosition, bool center = false);
 	void createButton(std::string labelText, std::function<void()> callback,sf::Vector2f buttonPosition);
 	void createCounter(unsigned * value, std::string labelText, sf::Vector2f widgetPosition);
 	void createAddTextItem(std::string labelText, std::function<void(std::string text)> addItemCallback, sf::Vector2f widgetPosition);
