@@ -4,19 +4,13 @@
 GameBoard::GameBoard(StateManager * stateManager) :
 	GameScreen(stateManager),
 	resolveTimeout(new SetTimeout()),
-	currentPlayer(0),
-	playingFieldBackground(),
-	playingField(),
-	playersHUD(sf::FloatRect(0, 0, WIDTH, HEIGHT))
+	playingField()
 {
-	playingFieldBackground.setSize(calculatePlayingFieldScale());
+	tableBorder = new TableBorder(stateManager->getPlayers());
 	playingField.setSize(calculatePlayingFieldScale());
 	playingField.setCenter(calculateDeckSize() / 2.f);
 	playingField.setViewport(sf::FloatRect(0.05f, 0.05f, 0.9f, 0.9f));
-	playingFieldBackground.setFillColor(sf::Color(255, 255, 255, 50));
 	deck = createDeck(stateManager->gameSettings->boardSize);
-	players = stateManager->getPlayers();
-	positionPlayers();
 }
 
 GameBoard::~GameBoard()
@@ -29,15 +23,10 @@ GameBoard::~GameBoard()
 	deck.clear();
 }
 
-std::vector<sf::Vector2f> GameBoard::playerPositions = { { 512.f, 733.f },{ 999.f, 384.f },{ 512.f, 25.f },{ 25.f, 384.f } };
-std::vector<float> GameBoard::playerRotations = {0.f, 270.f, 0.f, 90.f };
-
 void GameBoard::renderScreen(sf::RenderWindow &window)
 {
-	playersHUD = window.getDefaultView();
-	window.setView(playersHUD);
 	GameScreen::renderScreen(window);
-	renderPlayers(window);
+	tableBorder->renderTableBorder(window);
 	window.setView(playingField);
 	renderPlayingField(window);
 	renderDeck(window);
@@ -108,42 +97,6 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 	return deck;
 }
 
-void GameBoard::positionPlayers()
-{
-	for (size_t i = 0; i < players.size(); i++)
-	{
-		if (i < 4)
-		{
-			float playerWidth = players[i]->playerTag.getLocalBounds().width;
-			int playerHeight = players[i]->playerTag.getCharacterSize();
-			players[i]->playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
-			players[i]->playerTag.setPosition(playerPositions[i]);
-			players[i]->playerTag.setRotation(playerRotations[i]);
-		}
-		else
-		{
-			players[i]->playerTag.setFillColor(sf::Color::Transparent);
-		}
-	}
-}
-
-void GameBoard::callNextPlayer()
-{
-	if (currentPlayer + 1 < players.size())
-	{
-		currentPlayer++;
-	}
-	else
-	{
-		currentPlayer = 0;
-	}
-}
-
-void GameBoard::renderPlayingField(sf::RenderWindow & window)
-{
-	window.draw(playingFieldBackground);
-}
-
 void GameBoard::renderDeck(sf::RenderWindow &window)
 {
 	for (size_t i = 0; i < deck.size(); i++)
@@ -157,14 +110,6 @@ void GameBoard::updateDeck(sf::Time deltaTime)
 	for (size_t i = 0; i < deck.size(); i++)
 	{
 		deck[i]->updateCard(deltaTime);
-	}
-}
-
-void GameBoard::renderPlayers(sf::RenderWindow & window)
-{
-	for (size_t i = 0; i < players.size(); i++)
-	{
-		players[i]->renderPlayer(window, Player::PlayerComponents::Name);
 	}
 }
 
@@ -217,7 +162,8 @@ void GameBoard::resolvePair(bool isPair)
 	{
 		solvedCards.insert(solvedCards.end(), revealedCards.begin(), revealedCards.end());
 		revealedCards.clear();
-		players[currentPlayer]->increaseScore();
+
+		tableBorder->score();
 
 		if (solvedCards.size() == deck.size())
 		{
@@ -233,7 +179,7 @@ void GameBoard::resolvePair(bool isPair)
 		}
 		revealedCards.clear();
 	}
-	callNextPlayer();
+	tableBorder->callNextPlayer();
 }
 
 void GameBoard::finishGame()

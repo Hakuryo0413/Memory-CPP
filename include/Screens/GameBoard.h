@@ -6,6 +6,7 @@
 #include "EndScreen.h"
 #include "Card.h"
 #include "Player.h"
+#include "TableBorder.h"
 #include "SetTimeout.h"
 
 class GameBoard :
@@ -24,17 +25,9 @@ private:
 	std::vector<Card*> solvedCards;
 	std::vector<Card*> createDeck(sf::Vector2u boardSize);
 
-	std::vector<Player *> players;
-	unsigned currentPlayer;
-	static std::vector<sf::Vector2f> playerPositions;
-	static std::vector<float> playerRotations;
-	void positionPlayers();
-	void callNextPlayer();
-
 	void renderPlayingField(sf::RenderWindow & window);
 	void renderDeck(sf::RenderWindow & window);
 	void updateDeck(sf::Time deltaTime);
-	void renderPlayers(sf::RenderWindow & window);
 
 	Card* cardClicked(sf::Vector2f mousePosition);
 	void handleCardClick(Card * clickedCard);
@@ -45,7 +38,7 @@ private:
 
 	sf::Vector2f calculateDeckSize();
 	sf::Vector2f calculatePlayingFieldScale();
-	sf::RectangleShape playingFieldBackground;
 	sf::View playingField;
-	sf::View playersHUD;
+
+	TableBorder * tableBorder;
 };
