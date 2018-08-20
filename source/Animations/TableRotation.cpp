@@ -37,5 +37,5 @@ void TableRotation::stopAnimation()
 void TableRotation::applyTransformation()
 {
 	float rotation = rotationAngle * float(std::sin(elapsedTime / animationDuration * (pi / 2.f))) + currentRotation;
-	animated->setRotation(rotation);
+	animated->setRotation(-rotation);
 };

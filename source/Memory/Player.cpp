@@ -76,6 +76,13 @@ void Player::fadePlayer(bool direction, PlayerComponents component)
 	}
 }
 
+void Player::centarTag()
+{
+	float playerWidth = playerTag.getLocalBounds().width;
+	int playerHeight = playerTag.getCharacterSize();
+	playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
+}
+
 void Player::increaseScore()
 {
 	score++;

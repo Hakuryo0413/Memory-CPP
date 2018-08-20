@@ -29,7 +29,7 @@ private:
 	void renderPlayers(sf::RenderWindow & window);
 
 	std::vector<Player *> players;
-	unsigned currentPlayer;
+	int currentPlayer;
 
 	TableRotation * tableRotation;
 };

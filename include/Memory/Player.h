@@ -21,6 +21,7 @@ public:
 	void updatePlayer(sf::Time deltaTime, PlayerComponents component);
 	void fadePlayer(bool direction, PlayerComponents component);		// fade in (true), fade out (false)
 
+	void centarTag();
 	void increaseScore();
 	sf::Text playerTag;
 	sf::Text playerScore;

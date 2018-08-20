@@ -22,7 +22,6 @@ const std::vector<float> TableBorder::playerRotations = {0.f, 270.f, 180.f, 90.f
 
 void TableBorder::renderTableBorder(sf::RenderWindow &window)
 {
-	//tableBorderView = window.getDefaultView();
 	window.setView(*tableBorderView);
 	renderBackground(window);
 	renderPlayers(window);
@@ -44,6 +43,23 @@ void TableBorder::callNextPlayer()
 		tableRotation->startAnimation(90.f);
 	}
 
+
+	if (players.size() > 4)
+	{
+		players[currentPlayer]->playerTag.setFillColor(sf::Color::Transparent);
+		int newPlayer = currentPlayer + 4;
+		if (newPlayer < players.size())
+		{
+			setPlayerLocation(players[newPlayer]->playerTag, newPlayer % 4);
+			players[newPlayer]->playerTag.setFillColor(sf::Color::White);
+		}
+		else
+		{
+			setPlayerLocation(players[newPlayer - players.size()]->playerTag, newPlayer % 4);
+			players[newPlayer - players.size()]->playerTag.setFillColor(sf::Color::White);
+		}
+	}
+
 	if (currentPlayer + 1 < players.size())
 	{
 		currentPlayer++;
@@ -51,19 +67,6 @@ void TableBorder::callNextPlayer()
 	else
 	{
 		currentPlayer = 0;
-	}
-
-	if (players.size() > 4)
-	{
-		if (currentPlayer - 4 >= 0)
-		{
-			players[currentPlayer - 4]->playerTag.setFillColor(sf::Color::Transparent);
-		}
-		else
-		{
-			players.end()[currentPlayer - 4]->playerTag.setFillColor(sf::Color::Transparent);
-		}
-		setPlayerLocation(players[currentPlayer]->playerTag, currentPlayer);
 	}
 }
 
@@ -76,10 +79,7 @@ void TableBorder::positionPlayers()
 {
 	for (int i = 0; i < players.size(); i++)
 	{
-		float playerWidth = players[i]->playerTag.getLocalBounds().width;
-		int playerHeight = players[i]->playerTag.getCharacterSize();
-		players[i]->playerTag.setOrigin(playerWidth / 2.f, playerHeight / 2.f);
-
+		players[i]->centarTag();
 
 		if (i < 4)
 		{
@@ -110,14 +110,14 @@ void TableBorder::createBackground()
 		sf::RectangleShape backgroundShape;
 		if (i % 2)
 		{
-			backgroundShape.setSize({ WIDTH, 50.f });
+			backgroundShape.setSize({ WIDTH - 50.f, 50.f });
 			backgroundShape.setOrigin({ WIDTH / 2.f, 25.f });
 		}
 		else {
-			backgroundShape.setSize({ HEIGHT, 50.f });
+			backgroundShape.setSize({ HEIGHT - 50.f, 50.f });
 			backgroundShape.setOrigin({ HEIGHT / 2.f, 25.f });
 		}
-		backgroundShape.setFillColor(sf::Color(0, 0, 0, 32));
+		backgroundShape.setFillColor(sf::Color(0, 0, 0, 50));
 		backgroundShape.setPosition(playerPositions[i]);
 		backgroundShape.setRotation(playerRotations[i]);
 		tableBorderBackground.push_back(backgroundShape);
