@@ -23,8 +23,18 @@ void FadeAnimation::startAnimation(bool direction)
 
 void FadeAnimation::applyTransformation()
 {
-	sf::Uint8 startAlpha = 0;
-	sf::Uint8 endAlpha = 255;
+	sf::Uint8 startAlpha;
+	sf::Uint8 endAlpha;
+	if (fadeDirection)
+	{
+		startAlpha = 0;
+		endAlpha = 255;
+	}
+	else
+	{
+		startAlpha = 255;
+		endAlpha = 0;
+	}
 	sf::Uint8 alpha = startAlpha + (endAlpha - startAlpha) * sf::Uint8(elapsedTime / animationDuration);
 	animated->setFillColor(sf::Color(255, 255, 255, alpha));
 };
