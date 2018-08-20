@@ -105,6 +105,15 @@
     <ClCompile Include="..\source\Screens\StartScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\Animations\TableRotation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\General\MusicPlayer.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Memory\TableBorder.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Animations\Animation.h">
@@ -167,7 +176,16 @@
     <ClInclude Include="..\include\Screens\StartScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Memory\Settings.h">
+    <ClInclude Include="..\include\Animations\TableRotation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\General\MusicPlayer.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Memory\TableBorder.h">
+      <Filter>Header Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\General\Settings.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
   </ItemGroup>
@@ -175,5 +193,38 @@
     <None Include="..\include\Animations\Animation.inl">
       <Filter>Header Files\Animations</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\data\audio\ButtonClickSound.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\data\audio\CardTurnSound.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\data\fonts\Beleren-Bold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\data\graphics\AirCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\Background(1024x768).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\CardBack(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\EarthCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\FireCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\WaterCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

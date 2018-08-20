@@ -37,7 +37,7 @@ void CardAnimation::applyTransformation()
 	}
 	else {
 		float scale = (elapsedTime - (animationDuration / 2.f)) / (animationDuration / 2.f);
-		animated->setScale(float(std::sin(scale * pi / 2)), 1.f);
+		animated->setScale(float(std::sin(scale * (pi / 2))), 1.f);
 	}
 }
 

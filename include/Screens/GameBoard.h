@@ -25,7 +25,6 @@ private:
 	std::vector<Card*> solvedCards;
 	std::vector<Card*> createDeck(sf::Vector2u boardSize);
 
-	void renderPlayingField(sf::RenderWindow & window);
 	void renderDeck(sf::RenderWindow & window);
 	void updateDeck(sf::Time deltaTime);
 

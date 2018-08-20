@@ -140,7 +140,7 @@ void StartScreen::createNewPlayer(std::string newPlayerName)
 	{
 		playerListHeight = 500.f;
 		playerListIndent = 500.f;
-		players.end()[-12]->playerTag.setFillColor(sf::Color::Transparent);
+		players.end()[-14]->playerTag.setFillColor(sf::Color::Transparent);
 	}
 	players.push_back(newPlayer);
 }

@@ -8,8 +8,10 @@ public:
 	TableRotation(sf::View * animated, sf::Time animationDuration);
 	~TableRotation();
 
-	void startAnimation(float angle = 90.f);
+	virtual void startAnimation(float angle = 90.f);
+	virtual void stopAnimation();
 private:
 	virtual void applyTransformation();
 	float rotationAngle;
+	float currentRotation;
 };

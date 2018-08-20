@@ -4,25 +4,33 @@
 TableBorder::TableBorder(std::vector<Player *> players) :
 	players(players),
 	currentPlayer(0),
-	tableBorderView(sf::FloatRect(0, 0, WIDTH, HEIGHT))
+	tableBorderView(new sf::View(sf::FloatRect(0, 0, WIDTH, HEIGHT)))
 {
-	tableRotation = new TableRotation(& tableBorderView, sf::seconds(0.5f));
+	tableRotation = new TableRotation(tableBorderView, sf::seconds(0.5f));
 	createBackground();
+	positionPlayers();
 }
 
 TableBorder::~TableBorder()
 {
+	delete tableRotation;
+	delete tableBorderView;
 }
 
 const std::vector<sf::Vector2f> TableBorder::playerPositions = {{WIDTH / 2.f, HEIGHT - 25.f}, {WIDTH - 25.f, HEIGHT / 2.f}, {WIDTH / 2.f, 25.f}, {25.f, WIDTH / 2.f}};
-const std::vector<float> TableBorder::playerRotations = {0.f, 270.f, 0.f, 90.f};
+const std::vector<float> TableBorder::playerRotations = {0.f, 270.f, 180.f, 90.f};
 
 void TableBorder::renderTableBorder(sf::RenderWindow &window)
 {
-	tableBorderView = window.getDefaultView();
-	window.setView(tableBorderView);
+	//tableBorderView = window.getDefaultView();
+	window.setView(*tableBorderView);
 	renderBackground(window);
 	renderPlayers(window);
+}
+
+void TableBorder::updateTableBorder(sf::Time deltaTime)
+{
+	tableRotation->updateAnimated(deltaTime);
 }
 
 void TableBorder::callNextPlayer()
@@ -66,7 +74,7 @@ void TableBorder::score()
 
 void TableBorder::positionPlayers()
 {
-	for (size_t i = 0; i < players.size(); i++)
+	for (int i = 0; i < players.size(); i++)
 	{
 		float playerWidth = players[i]->playerTag.getLocalBounds().width;
 		int playerHeight = players[i]->playerTag.getCharacterSize();

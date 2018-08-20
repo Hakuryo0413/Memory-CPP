@@ -1,8 +1,8 @@
 #pragma once
 
 // Window Settings
-#define WIDTH 1024
-#define HEIGHT 768
+#define WIDTH 800
+#define HEIGHT 800
 #define FRAMERATE 60
 
 // Paths

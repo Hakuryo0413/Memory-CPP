@@ -134,7 +134,9 @@
     <ClCompile Include="..\source\Animations\CardAnimation.cpp" />
     <ClCompile Include="..\source\Animations\FadeAnimation.cpp" />
     <ClCompile Include="..\source\Animations\SetTimeout.cpp" />
+    <ClCompile Include="..\source\Animations\TableRotation.cpp" />
     <ClCompile Include="..\source\General\AssetManager.cpp" />
+    <ClCompile Include="..\source\General\MusicPlayer.cpp" />
     <ClCompile Include="..\source\General\StateManager.cpp" />
     <ClCompile Include="..\source\GUI\AddTextItem.cpp" />
     <ClCompile Include="..\source\GUI\Button.cpp" />
@@ -147,6 +149,7 @@
     <ClCompile Include="..\source\Memory\Card.cpp" />
     <ClCompile Include="..\source\Memory\Game.cpp" />
     <ClCompile Include="..\source\Memory\Player.cpp" />
+    <ClCompile Include="..\source\Memory\TableBorder.cpp" />
     <ClCompile Include="..\source\Screens\EndScreen.cpp" />
     <ClCompile Include="..\source\Screens\GameBoard.cpp" />
     <ClCompile Include="..\source\Screens\GameScreen.cpp" />
@@ -157,7 +160,10 @@
     <ClInclude Include="..\include\Animations\CardAnimation.h" />
     <ClInclude Include="..\include\Animations\FadeAnimation.h" />
     <ClInclude Include="..\include\Animations\SetTimeout.h" />
+    <ClInclude Include="..\include\Animations\TableRotation.h" />
     <ClInclude Include="..\include\General\AssetManager.h" />
+    <ClInclude Include="..\include\General\MusicPlayer.h" />
+    <ClInclude Include="..\include\General\Settings.h" />
     <ClInclude Include="..\include\General\StateManager.h" />
     <ClInclude Include="..\include\GUI\AddTextItem.h" />
     <ClInclude Include="..\include\GUI\Button.h" />
@@ -169,7 +175,7 @@
     <ClInclude Include="..\include\Memory\Card.h" />
     <ClInclude Include="..\include\Memory\Game.h" />
     <ClInclude Include="..\include\Memory\Player.h" />
-    <ClInclude Include="..\include\Memory\Settings.h" />
+    <ClInclude Include="..\include\Memory\TableBorder.h" />
     <ClInclude Include="..\include\Screens\EndScreen.h" />
     <ClInclude Include="..\include\Screens\GameBoard.h" />
     <ClInclude Include="..\include\Screens\GameScreen.h" />
@@ -177,6 +183,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Animations\Animation.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\data\audio\ButtonClickSound.wav" />
+    <Media Include="..\data\audio\CardTurnSound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\data\fonts\Beleren-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\data\graphics\AirCard(90x160).png" />
+    <Image Include="..\data\graphics\Background(1024x768).png" />
+    <Image Include="..\data\graphics\CardBack(90x160).png" />
+    <Image Include="..\data\graphics\EarthCard(90x160).png" />
+    <Image Include="..\data\graphics\FireCard(90x160).png" />
+    <Image Include="..\data\graphics\WaterCard(90x160).png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

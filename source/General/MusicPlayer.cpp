@@ -4,7 +4,7 @@
 MusicPlayer::MusicPlayer() :
 	gameMusic()
 {
-	gameMusic.openFromFile(AUDIO_PATH + "MemoryMusic.ogg");
+	gameMusic.openFromFile(AUDIO_PATH "MemoryMusic.ogg");
 	gameMusic.setLoop(true);
 }
 

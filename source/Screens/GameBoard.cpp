@@ -23,18 +23,17 @@ GameBoard::~GameBoard()
 	deck.clear();
 }
 
-void GameBoard::renderScreen(sf::RenderWindow &window)
+void GameBoard::renderScreen(sf::RenderWindow & window)
 {
 	GameScreen::renderScreen(window);
 	tableBorder->renderTableBorder(window);
 	window.setView(playingField);
-	renderPlayingField(window);
 	renderDeck(window);
-	window.setView(window.getDefaultView());
 }
 
 void GameBoard::updateScreen(sf::Time deltaTime)
 {
+	tableBorder->updateTableBorder(deltaTime);
 	resolveTimeout->update(deltaTime);
 	updateDeck(deltaTime);
 }

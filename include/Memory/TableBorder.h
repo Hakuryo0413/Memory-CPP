@@ -11,6 +11,7 @@ public:
 	~TableBorder();
 
 	void renderTableBorder(sf::RenderWindow & window);
+	void updateTableBorder(sf::Time deltaTime);
 	void callNextPlayer();
 	void score();
 private:
@@ -20,7 +21,7 @@ private:
 	void positionPlayers();
 	void setPlayerLocation(sf::Text & playerTag, int position);
 
-	sf::View tableBorderView;
+	sf::View * tableBorderView;
 	std::vector<sf::RectangleShape> tableBorderBackground;
 	void createBackground();
 
