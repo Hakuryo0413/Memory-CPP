@@ -16,6 +16,7 @@ Card::~Card()
 
 sf::Texture & Card::cardBackTexture = AssetManager::getInstance()->getTexture("CardBack(90x160).png");
 sf::Vector2u Card::size = cardBackTexture.getSize();
+sf::Sound cardSound (AssetManager::getInstance()->getSoundBuffer("CardTurnSound.ogg"));
 
 sf::Time Card::animationTime = sf::seconds(0.5f);
 
@@ -50,6 +51,7 @@ bool Card::isCardClicked(sf::Vector2f mousePosition)
 void Card::flipCard()
 {
 	cardAnimation->startAnimation();
+	cardSound.play();
 }
 
 Card::Suit Card::getSuit()

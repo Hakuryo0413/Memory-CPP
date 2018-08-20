@@ -19,6 +19,8 @@ public:
 	virtual void handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & parentTransform);
 	virtual sf::Vector2f getSize();
 private:
+	static sf::Sound buttonSound;
+
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::function<void()> callback;
 

@@ -30,6 +30,8 @@ Button::~Button()
 	delete timeout;
 }
 
+sf::Sound buttonSound (AssetManager::getInstance()->getSoundBuffer("ButtonClickSound.ogg"));
+
 bool Button::isSelectable()
 {
 	return true;
@@ -58,6 +60,7 @@ void Button::handleMouseClick(sf::Vector2f mousePosition)
 	if (isClicked(mousePosition))
 	{
 		callback();
+		buttonSound.play();
 		if (timeout->delaying)
 		{
 			timeout->clearTimeout(true);
@@ -72,6 +75,7 @@ void Button::handleMouseClick(sf::Vector2f mousePosition, const sf::Transform & 
 	if (isClicked(mousePosition, parentTransform))
 	{
 		callback();
+		buttonSound.play();
 		if (timeout->delaying)
 		{
 			timeout->clearTimeout(true);

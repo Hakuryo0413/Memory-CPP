@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "AssetManager.h"
 #include "CardAnimation.h"
 
@@ -28,6 +29,7 @@ private:
 	static sf::Vector2u size;
 	static sf::Time animationTime;
 	static sf::Texture & cardBackTexture;
+	static sf::Sound cardSound;
 
 	sf::Sprite cardSprite;
 	sf::Texture cardTexture;
