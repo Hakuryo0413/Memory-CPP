@@ -9,7 +9,7 @@ GameBoard::GameBoard(StateManager * stateManager) :
 	tableBorder = new TableBorder(stateManager->getPlayers());
 	playingField.setSize(calculatePlayingFieldScale());
 	playingField.setCenter(calculateDeckSize() / 2.f);
-	playingField.setViewport(sf::FloatRect(0.05f, 0.05f, 0.9f, 0.9f));
+	playingField.setViewport(sf::FloatRect(0.0625f, 0.0625f, 0.875f, 0.875f));
 	deck = createDeck(stateManager->gameSettings->boardSize);
 }
 
@@ -196,15 +196,17 @@ sf::Vector2f GameBoard::calculateDeckSize()
 
 sf::Vector2f GameBoard::calculatePlayingFieldScale()
 {
-	sf::Vector2f playingFieldSize(WIDTH * 0.9f, HEIGHT * 0.9f);
+	sf::Vector2f playingFieldSize(WIDTH * 0.875f, HEIGHT * 0.875f);
 	sf::Vector2f deckSize = calculateDeckSize();
 	if (deckSize.x > playingFieldSize.x)
 	{
 		playingFieldSize.x = deckSize.x;
+		playingFieldSize.y = playingFieldSize.x;
 	}
 	if (deckSize.y > playingFieldSize.y)
 	{
 		playingFieldSize.y = deckSize.y;
+		playingFieldSize.x = playingFieldSize.y;
 	}
 	return playingFieldSize;
 }
