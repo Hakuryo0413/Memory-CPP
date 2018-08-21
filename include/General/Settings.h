@@ -6,6 +6,6 @@
 #define FRAMERATE 60
 
 // Paths
-#define GRAPHICS_PATH "media/graphics/"
-#define FONTS_PATH "media/fonts/"
-#define AUDIO_PATH "media/audio/"
+#define GRAPHICS_PATH "../media/graphics/"
+#define FONTS_PATH "../media/fonts/"
+#define AUDIO_PATH "../media/audio/"
