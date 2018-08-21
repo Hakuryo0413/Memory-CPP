@@ -24,6 +24,7 @@ public:
 	void pulsePlayer();
 
 	void centarTag(bool center);
+  std::string getName();
 	void increaseScore();
 	sf::Text playerTag;
 	sf::Text playerScore;

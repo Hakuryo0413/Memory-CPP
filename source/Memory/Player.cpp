@@ -99,6 +99,11 @@ void Player::centarTag(bool center)
 	}
 }
 
+std::string Player::getName()
+{
+  return name;
+}
+
 void Player::increaseScore()
 {
 	score++;

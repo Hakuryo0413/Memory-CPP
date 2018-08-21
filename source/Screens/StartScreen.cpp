@@ -130,24 +130,33 @@ void StartScreen::removeErrorMessage()
 
 void StartScreen::createNewPlayer(std::string newPlayerName)
 {
-	Player * newPlayer = new Player(newPlayerName);
-	newPlayer->playerTag.setPosition(playerListIndent, playerListHeight);
-	playerListHeight += newPlayer->playerTag.getCharacterSize() + 15.f;
-	if (playerListHeight > 700.f)
-	{
-		playerListHeight = 500.f;
-		playerListIndent += 150.f;
-	}
-	if (playerListIndent > 600.f)
-	{
-		playerListHeight = 500.f;
-		playerListIndent = WIDTH / 2.f;
-	}
-	if (players.size() >= 10)
-	{
-		players.end()[-10]->playerTag.setFillColor(sf::Color::Transparent);
-	}
-	players.push_back(newPlayer);
+  auto playerIterator = find_if(players.begin(), players.end(), [&newPlayerName](Player * player) {return player->getName() == newPlayerName;});
+  if (playerIterator != players.end())
+  {
+    createLabel("Add a unique player name!", { 50.f, 700.f });
+		timeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
+  }
+  else
+  {
+    Player * newPlayer = new Player(newPlayerName);
+    newPlayer->playerTag.setPosition(playerListIndent, playerListHeight);
+    playerListHeight += newPlayer->playerTag.getCharacterSize() + 15.f;
+    if (playerListHeight > 700.f)
+    {
+      playerListHeight = 500.f;
+      playerListIndent += 150.f;
+    }
+    if (playerListIndent > 600.f)
+    {
+      playerListHeight = 500.f;
+      playerListIndent = WIDTH / 2.f;
+    }
+    if (players.size() >= 10)
+    {
+      players.end()[-10]->playerTag.setFillColor(sf::Color::Transparent);
+    }
+    players.push_back(newPlayer);
+  }
 }
 
 void StartScreen::validateSettings()
