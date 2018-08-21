@@ -111,6 +111,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Tihana\Documents\Repos\Memory-CPP\SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,6 +129,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Tihana\Documents\Repos\Memory-CPP\SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -195,7 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\data\graphics\AirCard(90x160).png" />
-    <Image Include="..\data\graphics\Background(1024x768).png" />
+    <Image Include="..\data\graphics\Background(800x800).png" />
     <Image Include="..\data\graphics\CardBack(90x160).png" />
     <Image Include="..\data\graphics\EarthCard(90x160).png" />
     <Image Include="..\data\graphics\FireCard(90x160).png" />

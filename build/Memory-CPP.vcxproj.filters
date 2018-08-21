@@ -217,9 +217,6 @@
     <Image Include="..\data\graphics\AirCard(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\data\graphics\Background(1024x768).png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="..\data\graphics\CardBack(90x160).png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -230,6 +227,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="..\data\graphics\WaterCard(90x160).png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\data\graphics\Background(800x800).png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
