@@ -82,7 +82,6 @@ std::vector<Card*> GameBoard::createDeck(sf::Vector2u boardSize)
 
 	std::random_device rd;
 	std::mt19937 seed(rd());
-	//std::default_random_engine seed = std::default_random_engine{};
 	std::shuffle(std::begin(deck), std::end(deck), seed);
 	int index = 0;
 	for (unsigned i = 0; i < boardSize.x; i++)

@@ -17,8 +17,6 @@ void Game::run()
 {
 	sf::Clock clock;
 	musicPlayer.playMusic();
-	//stateManager->gameSettings->boardSize = { 4, 4 };
-	//stateManager->switchScreen(StateManager::Screen::Gameboard);
 	stateManager->switchScreen(StateManager::Screen::StartScreen);
 	while (window.isOpen())
 	{
@@ -46,10 +44,6 @@ void Game::processInput()
 		case sf::Event::TextEntered:
 			handleTextEntry(event.text);
 			break;
-		//case sf::Event::Resized:
-		//	sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-		//	window.setView(sf::View(visibleArea));
-		//	break;
 		case sf::Event::Closed:
 			window.close();
 			break;
