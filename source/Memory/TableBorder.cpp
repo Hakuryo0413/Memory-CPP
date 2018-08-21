@@ -4,6 +4,7 @@
 TableBorder::TableBorder(std::vector<Player *> players) :
 	players(players),
 	currentPlayer(0),
+	newPlayerPosition(0),
 	tableBorderView(new sf::View(sf::FloatRect(0, 0, WIDTH, HEIGHT))),
 	rotationTime(sf::seconds(0.5f))
 {
@@ -138,14 +139,15 @@ void TableBorder::rotateBoard()
 		int newPlayer = currentPlayer + 4;
 		if (newPlayer < players.size())
 		{
-			setPlayerLocation(players[newPlayer]->playerTag, newPlayer % 4);
+			setPlayerLocation(players[newPlayer]->playerTag, newPlayerPosition % 4);
 			players[newPlayer]->playerTag.setFillColor(sf::Color::White);
 		}
 		else
 		{
-			setPlayerLocation(players[newPlayer - players.size()]->playerTag, newPlayer % 4);
+			setPlayerLocation(players[newPlayer - players.size()]->playerTag, newPlayerPosition % 4);
 			players[newPlayer - players.size()]->playerTag.setFillColor(sf::Color::White);
 		}
+		newPlayerPosition++;
 	}
 }
 

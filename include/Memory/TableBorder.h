@@ -34,6 +34,7 @@ private:
 
 	std::vector<Player *> players;
 	int currentPlayer;
+	int newPlayerPosition;
 
 	void pulseCurrentPlayer();
 	sf::Time rotationTime;
