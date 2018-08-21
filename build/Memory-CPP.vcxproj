@@ -104,7 +104,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Tihana\Documents\Repos\Memory-CPP\SFML-2.5.0\include;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Screens;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Memory;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\GUI;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\General;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Animations;C:\Users\Tihana\Documents\Repos\Memory-CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SFML-2.5.0\include;$(ProjectDir)..\include\Screens;$(ProjectDir)..\include\Memory;$(ProjectDir)..\include\GUI;$(ProjectDir)..\include\General;$(ProjectDir)..\include\Animations;$(ProjectDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -122,7 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Tihana\Documents\Repos\Memory-CPP\SFML-2.5.0\include;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Screens;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Memory;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\GUI;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\General;C:\Users\Tihana\Documents\Repos\Memory-CPP\include\Animations;C:\Users\Tihana\Documents\Repos\Memory-CPP\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SFML-2.5.0\include;$(ProjectDir)..\include\Screens;$(ProjectDir)..\include\Memory;$(ProjectDir)..\include\GUI;$(ProjectDir)..\include\General;$(ProjectDir)..\include\Animations;$(ProjectDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
