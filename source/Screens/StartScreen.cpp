@@ -131,7 +131,7 @@ void StartScreen::removeErrorMessage()
 void StartScreen::createNewPlayer(std::string newPlayerName)
 {
   auto playerIterator = find_if(players.begin(), players.end(), [&newPlayerName](Player * player) {return player->getName() == newPlayerName;});
-  if (playerIterator != players.end())
+  if (playerIterator != players.end())      // check if name already exists
   {
     createLabel("Add a unique player name!", { 50.f, 700.f });
 		timeout->startTimeout(sf::seconds(1), std::bind(&StartScreen::removeErrorMessage, this));
