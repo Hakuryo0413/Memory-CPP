@@ -10,11 +10,3 @@ A card-based Memory game written in C++ using the SFML library as an exercise in
 * card and board animations
 * music and sounds
 * asset management
-
-### Asset credits
-* edited versions of *Skylanders elements* banner for cards
-* edited version of the neutral card background from *Gwent*
-* *Blurred wallpaper* from **Kypsh** from *Wallhavena* for the gameboard background
-* card flipping and button click sounds - **Kenney.nl**
-* background music *“Mysterious Puzzle”* - **Eric Matyas** ([soundimage.org](https://soundimage.org/))
-
