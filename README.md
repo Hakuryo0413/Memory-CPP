@@ -4,7 +4,7 @@ A card-based Memory game written in C++ using the SFML library as an exercise in
 
 ## Features
 * multiple screens with state management
-* muptiple players
+* multiple players
 * mini GUI system
 * configurable board size and player number and names
 * card and board animations
